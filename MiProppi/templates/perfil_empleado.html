@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/perfil_empleado.css' %}">
+    <title>Perfil Empleado</title>
+</head>
+<body>
+    
+    <div class="wrapper-container">
+
+        <div class="wrapper">
+            <h1>Hola {{ empleado.nombre }}</h1>
+            <div class="botones-accion">
+                <a href="{% url 'mis_comercios' %}" class="btn">Comercios</a>
+                <a href="{% url 'config_empleado' %}" class="btn">Configurar perfil</a>
+            </div>
+            <div class="informacion-comercio">
+                <p><strong>Haz recaudado:</strong> ${{ empleado.ingresos_diarios }}<strong> de propina en total</strong></p>
+                <p><strong>Propina recaudada hoy:</strong> ${{ empleado.ingresos_total }}</p>
+            </div>
+            
+        </div>
+
+
+    </div>
+    
+        
+    
+    
+</body>
+
+{% endblock %}
+</html>

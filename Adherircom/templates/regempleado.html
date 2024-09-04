@@ -1,0 +1,129 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Empleado</title>
+    <link rel="stylesheet" href="{% static 'css/regemp.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="wrapper-container">
+        <div class="wrapper">
+            <form action="{% url 'reg_empleados' %}" method="POST" novalidate>
+                {% csrf_token %}
+                <h1 class="centered-title">Paso 2: Agrega tus empleados</h1>
+                {% if success_message %}
+                    <div class="message">
+                        {{ success_message }}
+                    </div>
+                {% endif %}
+                <!--Errores-->
+                {% if form.non_field_errors %}
+                    <div class="text-danger">
+                        <p>{{ form.non_field_errors }}</p>
+                    </div>
+                {% endif %}
+                <!-- Error general de horarios (si existe) -->
+                {% if horario_form.non_field_errors %}
+                    <div class="text-danger">
+                        {% for error in horario_form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="input-box">
+                    <div class="input-field">
+                        <span class="details">Nombre:</span>
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre y Apellido" required>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="input-field">
+                        <span class="details">Email:</span>
+                        <input type="email" name="email" id="email" placeholder="Email" required>
+                    </div>
+                </div>
+
+                <div class="input-box">
+                    <div class="input-field">
+                        <span class="details">Alias:</span>
+                        <input type="text" name="alias" id="alias" placeholder="Alias" required>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <div class="input-field">
+                        <span class="details">CUIL:</span>
+                        <input type="text" name="cuil" id="cuil" placeholder="CUIL" required novalidate>
+                        {% if form.cuil.errors %}
+                            <div class="text-danger">
+                                <p>{{ form.cuil.errors }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <h2>Horarios de trabajo</h2>
+                <h3>Dias y Cantidad de horas</h3>
+                <div class="dia-trabajo">
+                    <label for="dia_0">Lunes</label>
+                    <input type="checkbox" id="dia_0" name="dia_0">
+                    <input type="number" id="cantidad_horas_0" name="cantidad_horas_0" min="0" >
+                </div>
+                <div class="dia-trabajo">
+                    <label for="dia_1">Martes</label>
+                    <input type="checkbox" id="dia_1" name="dia_1">
+                    <input type="number" id="cantidad_horas_1" name="cantidad_horas_1" min="1" >
+                </div>
+                <div class="dia-trabajo">
+                    <label for="dia_2">Miércoles</label>
+                    <input type="checkbox" id="dia_2" name="dia_2">
+                    <input type="number" id="cantidad_horas_2" name="cantidad_horas_2" min="0" >
+                </div>
+                <div class="dia-trabajo">
+                    <label for="dia_3">Jueves</label>
+                    <input type="checkbox" id="dia_3" name="dia_3">
+                    <input type="number" id="cantidad_horas_3" name="cantidad_horas_3" min="0" >
+                </div>
+                <div class="dia-trabajo">
+                    <label for="dia_4">Viernes</label>
+                    <input type="checkbox" id="dia_4" name="dia_4">
+                    <input type="number" id="cantidad_horas_4" name="cantidad_horas_4" min="0" >
+                </div>
+                <div class="dia-trabajo">
+                    <label for="dia_5">Sábado</label>
+                    <input type="checkbox" id="dia_5" name="dia_5">
+                    <input type="number" id="cantidad_horas_5" name="cantidad_horas_5" min="0" >
+                </div>
+                <div class="dia-trabajo">
+                    <label for="dia_6">Domingo</label>
+                    <input type="checkbox" id="dia_6" name="dia_6">
+                    <input type="number" id="cantidad_horas_6" name="cantidad_horas_6" min="0" >
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" id="agregar_otro" class="btn" name="action" value="agregar_otro">Agregar empleado</button>
+                    <button type="submit" id="guardar" class="btn" name="action" value="guardar">Guardar todo</button>
+                </div>
+            </form>
+        </div>
+        <script>
+            document.getElementById('guardar').addEventListener('click', function(e) {
+                var confirmation = confirm('¿Estás seguro de que deseas guardar todos los empleados?');
+                if (confirmation) {
+                    // Establece el valor del campo action en el formulario antes de enviarlo
+                    document.querySelector('form').action = '{% url "reg_empleados" %}';
+                    document.querySelector('form').submit();  // Envía el formulario si se confirma
+                }
+            });
+        </script>
+    </div>
+</body>
+{% endblock %}
+</html>
+
+
+

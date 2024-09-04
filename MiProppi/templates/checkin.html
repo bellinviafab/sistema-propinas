@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-In</title>
+    <link rel="stylesheet" href="{% static 'css/checkin.css' %}">
+</head>
+    <body>
+
+        <div class="wrapper-container">
+
+            <div class="wrapper">
+
+                <h1 class="centered-title">Check-In para {{ comercio.nombre_comercio }}</h1>
+
+                <form id="checkin-form" method="POST">
+                    {% csrf_token %}
+                    <label for="cuil">Código:</label>
+                    <input type="text" id="cuil" name="cuil" required>
+                    <button type="submit">Registrar Entrada</button>
+                    {% if error %}
+                        <p class="message" >{{ error }}</p>
+                    {% endif %}
+                    {% if success %}
+                        <p class="message success">{{ success }}</p>
+                        <p>Hora de salida: {{ hora_salida }}</p>
+                    {% endif %}
+                </form>
+                <p id="message"></p>
+            </div>
+            
+        </div>
+
+    </body>
+   {% endblock %}
+</html>

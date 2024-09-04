@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+    {% load static %}
+
+    {% block content %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/confirmar_cuenta.css' %}">
+        <title>confirmar_cuenta</title>
+    </head>
+    <body>
+        
+        <div class="wrapper-container">
+            <div class="wrapper">
+                <h1>Hemos enviado un link a su correo para que confirme su cuenta</h1>
+            </div>
+        </div>
+
+    </body>
+
+    {% endblock %}
+    </html>

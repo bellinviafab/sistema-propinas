@@ -1,0 +1,90 @@
+#loginForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    color: white;
+}
+
+#loginForm h1 {
+    text-align: center;
+    color: #d09e3b;
+    font-size: 28px;
+    font-family: 'Lato', sans-serif;
+}
+
+#loginForm p {
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+#loginForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+#loginForm label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+#loginForm input[type="text"],
+#loginForm input[type="password"],
+#loginForm input[type="email"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#loginForm button {
+    padding: 10px;
+    background-color: #d09e3b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#loginForm button:hover {
+    background-color: #b8860b;
+}
+
+/* Reglas de medios para hacer responsive */
+@media screen and (max-width: 768px) {
+    #menuContainer {
+        width: 100%;
+        left: -100%;
+    }
+  
+    #mainContent {
+        margin-left: 0;
+        padding: 16px;
+    }
+  
+    #menuToggle {
+        margin-left: 10px;
+    }
+  
+    #centeredTitle {
+        font-size: 38px; /* Tamaño de fuente más pequeño para pantallas pequeñas */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    #menuContainer a {
+        font-size: 16px; /* Tamaño de fuente más pequeño para pantallas muy pequeñas */
+        padding: 10px 15px;
+    }
+  
+    #centeredTitle {
+        font-size: 28px; /* Tamaño de fuente más pequeño para pantallas muy pequeñas */
+    }
+  
+    #menuToggle {
+        font-size: 24px; /* Tamaño de ícono más pequeño para pantallas muy pequeñas */
+        margin-left: 5px;
+    }
+  }

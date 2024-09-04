@@ -1,0 +1,10 @@
+.wrapper-container {
+    font-family: 'Kumbh Sans', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Asegúrate de que cubra toda la pantalla */
+    padding: 0 20px; /* Espaciado opcional */
+}

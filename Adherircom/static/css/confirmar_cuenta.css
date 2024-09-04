@@ -1,0 +1,33 @@
+.wrapper-container {
+    font-family: 'Kumbh Sans', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 750px; /* Ancho máximo del contenedor */
+    background: #009EE3;
+    border: 2px solid #009EE3;
+    border-radius: 10px;
+    color: #fff;
+    padding: 40px 35px 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Centrando el texto del h1 */
+}
+
+.wrapper h1 {
+    font-size: 28px; /* Tamaño de fuente más grande */
+    margin: 0; /* Elimina el margen por defecto del h1 */
+    line-height: 1.2; /* Ajusta el interlineado para una mejor legibilidad */
+}
+
+

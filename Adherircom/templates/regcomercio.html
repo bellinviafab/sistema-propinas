@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+ {% load static %}
+
+    {% block content %}
+
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/regcom.css' %}">
+</head>
+
+<body>
+
+    <div class="wrapper-container">
+
+        <div class="wrapper">
+    
+            <form action="/crearcuenta/agregar_comercio/" method="POST">
+                {% csrf_token %}
+                
+                <h1 class="centered-title">Paso 1: Registra tu comercio</h1>
+    
+                <div class="input-box">
+                    <div class="input-field">
+                        <span class="details">Nombre del comercio:</span>
+                        <input type="text" name="nombre_comercio" id="nombre_comercio" placeholder="Nombre del Comercio" required>
+                    </div>
+                </div>
+    
+                <div class="input-box">
+                    <div class="input-field">
+                        <span class="details">Tipo:</span>
+                        <select name="tipo_comercio" id="tipo_comercio" required>
+                            <option value="restaurante">Restaurante</option>
+                            <option value="cafe">Café</option>
+                            <option value="bar">Bar</option>
+                            <option value="otros">Otros</option>
+                        </select>  
+                    </div>
+                </div>
+    
+                <div class="input-box">
+                    <div class="input-field">
+                        <span class="details">Provincia:</span>
+                        <select name="provincia" id="provincia" required>
+                            <option value="">Selecciona una provincia</option>
+                            <option value="caba">Ciudad Autónoma de Buenos Aires</option>
+                            <option value="buenos_aires">Buenos Aires</option>
+                            <option value="catamarca">Catamarca</option>
+                            <option value="chaco">Chaco</option>
+                            <option value="chubut">Chubut</option>
+                            <option value="cordoba">Córdoba</option>
+                            <option value="corrientes">Corrientes</option>
+                            <option value="entre_rios">Entre Ríos</option>
+                            <option value="formosa">Formosa</option>
+                            <option value="jujuy">Jujuy</option>
+                            <option value="la_pampa">La Pampa</option>
+                            <option value="la_rioja">La Rioja</option>
+                            <option value="mendoza">Mendoza</option>
+                            <option value="misiones">Misiones</option>
+                            <option value="neuquen">Neuquén</option>
+                            <option value="rio_negro">Río Negro</option>
+                            <option value="salta">Salta</option>
+                            <option value="san_juan">San Juan</option>
+                            <option value="san_luis">San Luis</option>
+                            <option value="santa_cruz">Santa Cruz</option>
+                            <option value="santa_fe">Santa Fe</option>
+                            <option value="santiago_del_estero">Santiago del Estero</option>
+                            <option value="tierra_del_fuego">Tierra del Fuego</option>
+                            <option value="tucuman">Tucumán</option>                            
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-box">
+                    <div class="input-field">
+                        <span class="details">Ciudad:</span>
+                        <select name="ciudad" id="ciudad" class="ciudad" required>
+                            <option value="">Seleccione una ciudad</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-box">
+                    <div class="input-field">
+                        <span class="details">Dirección:</span>
+                        <input type="text" name="direccion" id="direccion" placeholder="Dirección" required>
+                    </div>
+                </div>
+    
+                <button type="submit" class="btn">
+                    Guardar
+                </button>
+            </form>
+    
+        </div>
+    
+    </div>
+    
+    <script src="{% static '/js/regcom.js' %}"></script>
+
+</body>
+{% endblock %}
+</html>
+        

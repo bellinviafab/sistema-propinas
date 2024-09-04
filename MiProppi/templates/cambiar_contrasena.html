@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper-container">
+        <div class="wrapper">
+
+            <form method="POST" action="/Proppi/cambiar_contrasena/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="password">Introduce tu contraseña actual</label>
+                    {{ form.as_p }}
+                </div>
+                <button type="submit">Cambiar Contraseña</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+{% endblock %}
+</html>

@@ -1,0 +1,281 @@
+.wrapper-container {
+    font-family: 'Poppins', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 750px;
+    background: #009EE3;
+    border: 2px solid #009EE3;
+    border-radius: 10px;
+    color: #fff;
+    padding: 40px 35px 55px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.wrapper h1, .wrapper h2, .wrapper h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper h1 {
+    font-size: 36px;
+}
+
+.wrapper h2 {
+    font-size: 30px;
+}
+
+.wrapper h3 {
+    font-size: 20px;
+}
+
+.wrapper .input-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: transparent;
+    margin-bottom: 20px;
+}
+
+.input-box .input-field {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 5px 0;
+}
+
+.input-box .input-field span.details {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-box .input-field input[type="text"],
+.input-box .input-field input[type="email"],
+.input-box .input-field input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+}
+
+.input-box .input-field input[type="text"]::placeholder,
+.input-box .input-field input[type="email"]::placeholder,
+.input-box .input-field input[type="number"]::placeholder {
+    color: #999;
+}
+
+.dia-trabajo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dia-trabajo label {
+    flex: 1;
+    color: #fff;
+    font-weight: bold;
+    text-align: left;
+    margin-right: 10px;
+}
+
+.dia-trabajo input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background-color: #d5d5d5;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: #004f7a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+.dia-trabajo input[type="checkbox"]::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f00c"; 
+    font-size: 18px;
+    color: white;
+    display: none;
+}
+
+.dia-trabajo input[type="checkbox"]:hover {
+    background-color: #a5a5a5;
+}
+
+.dia-trabajo input[type="checkbox"]:checked {
+    background-color: #5bcd3e;
+}
+
+.dia-trabajo input[type="checkbox"]:checked:after {
+    display: block;
+}
+
+.dia-trabajo input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+button.btn {
+    width: 48%;
+    padding: 15px 0;
+    font-size: 18px;
+    color: #fff;
+    background-color: transparent;
+    border: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #004f7a;
+    color: #fff;
+}
+
+.text-danger {
+    color: #dc3545; /* Color rojo para el texto */
+    border: 1px solid #dc3545; /* Borde rojo */
+    background-color: #f8d7da; /* Fondo de color rosado claro */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-top: 10px; /* Espaciado superior */
+}
+
+.message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d0e9c6;
+}
+
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        padding: 30px 25px 45px;
+    }
+
+    .wrapper h1 {
+        font-size: 28px;
+    }
+
+    .wrapper h2 {
+        font-size: 24px;
+    }
+
+    .wrapper h3 {
+        font-size: 18px;
+    }
+
+    .dia-trabajo {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .dia-trabajo label {
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    .dia-trabajo input[type="checkbox"],
+    .dia-trabajo input[type="number"] {
+        margin: 5px 0;
+        width: 100%;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .buttons button.btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        padding: 20px 15px 35px;
+    }
+
+    .wrapper h1 {
+        font-size: 24px;
+    }
+
+    .wrapper h2 {
+        font-size: 20px;
+    }
+
+    .wrapper h3 {
+        font-size: 16px;
+    }
+
+    .dia-trabajo label {
+        font-size: 14px;
+    }
+
+    .dia-trabajo input[type="checkbox"]::after {
+        font-size: 14px;
+    }
+
+    .dia-trabajo input[type="number"] {
+        font-size: 14px;
+        padding: 4px;
+    }
+
+    .buttons button.btn {
+        padding: 12px 0;
+        font-size: 16px;
+    }
+}
+
+
+
+
+

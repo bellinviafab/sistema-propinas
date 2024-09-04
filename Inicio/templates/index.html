@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proppi</title>
+  <link rel="stylesheet" href="{% static '/styles/estilo.css' %}">
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.ico' %}">
+</head>
+<body>
+
+  <!-- Hero section  -->
+  <div class="hero" id="home">
+    <div class="hero__container">
+      <h1 class="hero__heading">Un gesto , <span>Dos sonrisas</span></h1>
+      <p class="hero__description">Con Proppi, revolucionamos las propinas de tu comercio.</p>
+      <button class="main__btn"><a href="{% url 'crear_cuenta' %}">Registrate</a></button>
+    </div>
+  </div>
+
+  <!-- About section -->
+  <div class="main" id="about">
+    <div class="main__container">
+      <div class="main__img--container">
+        <div class="main__img--card">ICONO</div>
+      </div>
+      <div class="main__content">
+        <h1>Que hacemos?</h1>
+        <h2>Organizamos tu comercio</h2>
+        <p>Gestionamos automaticamente las propinas ingresadas por los clientes de tu comercio</p>
+        <button class="main__btn"><a href="{% url 'contacto' %}">Contactanos</a></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Servicio section-->
+   <div class="services" id="services">
+      <h1> Beneficios con Proppi: </h1>
+      <div class="services__wrapper">
+        <div class="services__card">
+          <h2>Agilidad</h2>
+          <p>Agilizamos el servicio de propinas</p>
+          <div class="services__btn"><button>Registrarse</button></div>
+        </div>
+        <div class="services__card">
+          <h2>Transparencia</h2>
+          <p>Transparentamos un servicio esencial </p>
+          <div class="services__btn"><button>Registrarse</button></div>
+        </div>
+        <div class="services__card">
+          <h2>Digitalización</h2>
+          <p>Digitalizamos una costumbre</p>
+          <div class="services__btn"><button>Registrarse</button></div>
+        </div>
+        <div class="services__card">
+          <h2>Mejoras</h2>
+          <p>Mejoras la atencion en tu comercio</p>
+          <div class="services__btn"><button>Registrarse</button></div>
+        </div>
+      </div>
+   </div>
+
+   <!-- Unéte seccion -->
+   <div class="main" id="sign-up">
+    <div class="main__container">
+      <div class="main__content">
+        <h1>Registrate hoy</h1>
+        <h2>Marcá la diferencia con Proppi</h2>
+        <button class="main__btn"><a href="{% url 'crear_cuenta' %}">Registrarse</a></button>
+      </div>
+      <div class="main__img--container">
+        <div class="main__img--card">ICONO</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static '/js/script.js' %}"></script>
+  
+
+
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,64 @@
+.wrapper-container {
+    font-family: 'Poppins', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+/* Estilo para el contenedor interno */
+.wrapper {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilo para el título */
+.wrapper h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Estilo para los botones de acción */
+.botones-accion {
+    margin-bottom: 20px;
+}
+
+.botones-accion .btn {
+    display: inline-block;
+    background-color: #009EE3;
+    background-image: linear-gradient(to top, #009EE3 0%, #149eda 100%);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.botones-accion .btn:hover {
+    background-color: #005bb5;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para la información del comercio */
+.informacion-comercio p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.informacion-comercio strong {
+    color: #333;
+}

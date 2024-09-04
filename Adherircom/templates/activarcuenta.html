@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p>Hola {{ user.first_name }},</p>
+    <p>Por favor haz clic en el enlace de abajo para activar tu cuenta:</p>
+    <p>
+        <a href="http://{{ domain }}{% url 'activar_cuenta' uidb64=uid token=token %}">Activar mi cuenta</a>
+    </p>
+    <p>Gracias,</p>
+    <p>Equipo de Proppi</p>
+
+</body>
+</html>

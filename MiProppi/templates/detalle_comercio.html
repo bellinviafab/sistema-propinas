@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/detalle_comercio.css' %}">
+    <title>{{ comercio.nombre_comercio }}</title>
+</head>
+<body>
+
+<div class="wrapper-container">
+
+    <div class="wrapper">
+        
+        <div class="comercio-header">
+            <form id="upload-form" action="{% url 'subir_imagen_comercio' comercio.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="file-input">
+                    <img src="{% if comercio.imagen %}{{ comercio.imagen.url }}{% else %}{% static 'images/default_comercio.png' %}{% endif %}" alt="Logo del Comercio" id="comercio-logo">
+                </label>
+                <input id="file-input" type="file" name="imagen" style="display: none;" onchange="document.getElementById('upload-form').submit();">
+            </form>
+            <h1>{{ comercio.nombre_comercio }}</h1>
+        </div>
+
+        {% if perms.Adherircom.change_comercio %}
+            <div class="botones-accion">
+                <a href="#" class="btn">Información del Comercio</a>
+                <a href="{% url 'agregar_emp' comercio.id %}" class="btn">Agregar un Empleado</a>
+                <a href="{% url 'eliminar_emp' comercio.id %}" class="btn">Eliminar un Empleado</a>
+                <a href="#" class="btn">Modificar Información del Comercio</a>
+            </div>
+        {% endif %}
+
+        <div class="informacion-comercio">
+            <h3>Información del Comercio</h3>
+            <p><strong>Dirección:</strong> {{ comercio.direccion }}</p>
+            <p><strong>Propina Recaudada Hoy:</strong> ${{ comercio.ingresos_diarios }}</p>
+            <p><strong>Propina Total Recaudada:</strong> ${{ comercio.ingresos_total }}</p>
+            <p><strong>Cantidad de Empleados:</strong> {{ comercio.empleados.count }}</p>
+        </div>
+
+        <div class="lista-empleados">
+            <h3>Empleados del Comercio</h3>
+            <ul>
+                {% for empleado in comercio.empleados.all %}
+                <li>{{ empleado.nombre }} - Alias: {{ empleado.alias }} - CUIL: {{ empleado.cuil }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+{% endblock %}
+</html>

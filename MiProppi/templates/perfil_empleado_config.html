@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/perfil_empleado_config.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper-container">
+        <div class="wrapper">
+            <h1>Configurar Perfil</h1>
+            <div class="botones-accion">
+                <a href="{% url 'cambiar_contrasena' %}" class="btn">Cambiar contraseña</a>
+            </div>
+            <form action="/Proppiempleado/perfil_config/" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_nombre">Nombre:</label>
+                    <input type="text" id="id_nombre" value="{{ empleado.nombre }}" readonly class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="id_cuil">CUIL:</label>
+                    <input type="text" id="id_cuil" value="{{ empleado.cuil }}" readonly class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="alias">Alias</label>
+                    {{ form.alias }}
+                </div>
+                <div class="botones-accion">
+                    <button type="submit" class="btn">Guardar Cambios</button>
+                    <a href="{% url 'perfil_empleado' %}" class="btn">Cancelar</a>
+                </div>
+                {% if messages %}
+                <div class="message-container">
+                    {% for message in messages %}
+                        <div class="message {{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</body>
+
+
+
+{% endblock %}
+</html>

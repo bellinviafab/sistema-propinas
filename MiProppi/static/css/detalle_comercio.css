@@ -1,0 +1,120 @@
+.wrapper-container {
+    font-family: 'Poppins', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    background-color: #1c1c1c;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Estilo para el encabezado del comercio */
+.comercio-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.comercio-header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #00BFFF;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-right: 20px; /* Añade un margen a la derecha de la imagen para separar el texto */
+}
+
+.comercio-header h1 {
+    font-size: 40px;
+    color: #00BFFF;
+    text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+}
+
+
+.comercio-header img:hover {
+    transform: scale(1.05);
+}
+
+/* Estilo para los botones de acción */
+.botones-accion {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.botones-accion .btn {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #00BFFF;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.botones-accion .btn:hover {
+    background-color: #0080FF;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para la información del comercio */
+.informacion-comercio {
+    margin-bottom: 30px;
+}
+
+.informacion-comercio h3 {
+    font-size: 24px;
+    color: #00BFFF;
+    margin-bottom: 15px;
+}
+
+.informacion-comercio p {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #ccc;
+}
+
+/* Estilo para la lista de empleados */
+.lista-empleados {
+    margin-bottom: 30px;
+}
+
+.lista-empleados h3 {
+    font-size: 24px;
+    color: #00BFFF;
+    margin-bottom: 15px;
+}
+
+.lista-empleados ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-empleados ul li {
+    font-size: 18px;
+    margin-bottom: 10px;
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+
+
