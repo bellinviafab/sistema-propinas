@@ -5,3 +5,4 @@ codigo_qr_entrada/
 comercio_images/
 media/
 staticfiles/
+db.sqlite3
