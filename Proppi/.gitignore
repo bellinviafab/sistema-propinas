@@ -1,4 +1,4 @@
-*.env
+.env
 venv/
 codigo_qr/
 codigo_qr_entrada/
