@@ -240,10 +240,10 @@ def login_empleado(request):
 
 @login_required
 @permission_required("MiProppi.add_checkinout")
-def perfil_empleado(request):
+def perfil(request):
     empleado = get_object_or_404(Empleado, user=request.user)
     comercios = empleado.comercios.all()
-    return render(request, 'perfil_empleado.html', {
+    return render(request, 'perfil.html', {
         'empleado': empleado,
         'comercios': comercios
     })
