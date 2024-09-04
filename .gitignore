@@ -1,0 +1,7 @@
+.env
+venv
+codigo_qr
+codigo_qr_entrada
+comercio_images
+media
+staticfiles
