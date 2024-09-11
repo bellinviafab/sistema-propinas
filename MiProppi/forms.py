@@ -13,3 +13,11 @@ class ConfigurarPerfilForm(forms.ModelForm):
         }
 
 
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+        widgets = {
+            'first_name': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'last_name': forms.TextInput(attrs={'readonly': 'readonly'}),
+        }

@@ -20,6 +20,7 @@ def index(request):
 access_token = settings.MERCADO_PAGO_ACCESS_TOKEN
 sdk = mercadopago.SDK(access_token)
 
+
 @csrf_exempt
 def deposita_propina(request, comercio_id):
     comercio_objeto = get_object_or_404(Comercio, id=comercio_id)
@@ -133,7 +134,7 @@ def valida_firma(request):
         return False
 
     # Obtener la clave secreta para el usuario/aplicación desde el sitio de desarrolladores de Mercado Pago
-    secret = "95bc5336ea5b7e7d347fa8b5875319d25684e8f653108e0ebaaae623c082ad2b" #Ocultar
+    secret = settings.MERCADO_PAGO_KEY
 
     # Generar la cadena manifest
     manifest = f"id:{data_id};request-id:{x_request_id};ts:{ts};" 

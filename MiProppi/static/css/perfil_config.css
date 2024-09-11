@@ -130,3 +130,14 @@ h1 {
     border: 1px solid #f5c6cb;
 }
 
+.informacion-comercio p {
+    font-size: 17px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border-left: 3px solid #000000; /* Agrega una barra lateral para destacar la información */
+}
+
+.informacion-comercio strong {
+    font-weight: bold;
+    color: #000;
+}

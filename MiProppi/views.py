@@ -47,23 +47,20 @@ def signin(request): #Comprobar en base de datos si datos existen  Añadir olvid
                 'error': 'No tienes permisos para acceder como comercio.'
                 })
   
-@login_required
-@permission_required("Adherircom.view_comercio")
-def cuenta(request):  #Muestra comercios segun sea usuario-comercio o usuario-empleao
-    if request.user.groups.filter(name='usuario-comercio').exists():
-        comercios = Comercio.objects.filter(user=request.user)
-    elif request.user.groups.filter(name='usuario-empleado').exists():
-        empleado = Empleado.objects.filter(user=request.user).first()
-        if empleado:
-            comercios = Comercio.objects.filter(empleados__in=[empleado])
+def perfil_usercom_config(request):
+    usercom = get_object_or_404(User, id=request.user.id)
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=usercom)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cambios realizados con éxito.')
+            return redirect('perfil_usercom_config')
         else:
-            comercios = Comercio.objects.none()
+            messages.error(request, 'Ocurrió un error al realizar los cambios. Por favor, verifica los campos.')
     else:
-        comercios = Comercio.objects.none()
+        form = UserUpdateForm(instance=usercom)
 
-    return render(request, 'mis_comercios.html', {
-        'comercios': comercios
-    })
+    return render(request, 'perfil_usercom_config.html',{'form':form})
 
 logger = logging.getLogger(__name__)
 @login_required
@@ -211,7 +208,7 @@ def elimina_emp(empleado_id):
         return False
     
 
-#Login  y vistas del empleado. 
+#Vistas del empleado. 
 #Login es distinto por pertenecer al grupo usuario-empleado
 
 def login_empleado(request):
@@ -238,15 +235,6 @@ def login_empleado(request):
                     'error': 'No tienes permisos para acceder como empleado.'
                 })
 
-@login_required
-@permission_required("MiProppi.add_checkinout")
-def perfil(request):
-    empleado = get_object_or_404(Empleado, user=request.user)
-    comercios = empleado.comercios.all()
-    return render(request, 'perfil.html', {
-        'empleado': empleado,
-        'comercios': comercios
-    })
 
 def checkin(request, comercio_id):  ##Aca se deberá manejar la vista del checkin de los empleados
     comercio = get_object_or_404(Comercio, id=comercio_id)
@@ -323,6 +311,38 @@ def configurar_perfil(request): #Corregir excepciones
 
 #Comunes a ambos usuarios
 @login_required
+def perfil(request):
+    context = {}
+
+    if request.user.groups.filter(name='usuario-empleado').exists():
+        empleado = get_object_or_404(Empleado, user=request.user)
+        context['empleado'] = empleado
+        context['is_empleado'] = True
+    elif request.user.groups.filter(name='usuario-comercio').exists():
+        context['dueno'] = request.user
+        context['is_dueno'] = True
+    return render(request, 'perfil.html', context )
+
+@login_required
+@permission_required("Adherircom.view_comercio")
+def cuenta(request):  #Muestra comercios segun sea usuario-comercio o usuario-empleao
+    if request.user.groups.filter(name='usuario-comercio').exists():
+        comercios = Comercio.objects.filter(user=request.user)
+    elif request.user.groups.filter(name='usuario-empleado').exists():
+        empleado = Empleado.objects.filter(user=request.user).first()
+        if empleado:
+            comercios = Comercio.objects.filter(empleados__in=[empleado])
+        else:
+            comercios = Comercio.objects.none()
+    else:
+        comercios = Comercio.objects.none()
+
+    return render(request, 'mis_comercios.html', {
+        'comercios': comercios
+    })
+
+
+@login_required
 def cambiar_contrasena(request):
     if request.method == 'GET':
         form = PasswordChangeForm(user=request.user)
@@ -343,3 +363,4 @@ def cambiar_contrasena(request):
 
 def recuperar_contraseña(request):
     return render(request, 'recuperar_contraseña.html')
+
