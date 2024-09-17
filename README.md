@@ -75,7 +75,6 @@ Cuestiones a agregar:
   -Más opciones de reparto de propina 
   -Mejorar tema de redireccion de rutas protegidas H
   -Corregir, que botón guardar funcione como un guardar todo H 
-  -ACTUALIZAR INFO PARA CUENTA MAIN H
   -Si ya esta registrado, que rediriga a la cuenta H 
   -Si ya esta logeado que no figure el log H
   -Cada empleado debería poder estar relacionado con multiples comercios H
@@ -88,4 +87,12 @@ Cuestiones a agregar:
   -Ocultar public keys
     -Solicitud del front para acceder a las keys
 
-    -Poder ver horarios de cada empleado / poder modificarlos
+    
+
+    Cosas por terminar:
+        -Cambiar base de datos
+        -Hacer prueba con mercado pago en produccion
+        -Implementar modo
+        -Revisar INFO PARA CUENTA MAIN  
+        -Poder ver horarios de cada empleado / poder modificarlos
+
