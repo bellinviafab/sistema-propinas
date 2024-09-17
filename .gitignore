@@ -6,3 +6,4 @@ comercio_images/
 media/
 staticfiles/
 db.sqlite3
+datadump.json
