@@ -58,10 +58,13 @@ Intrucciones de instalación en entorno local:
 
     -Crear archivo .env en la raiz, añadir variables de entorno para las keys
 
-5- Aplicar migraciones
+5-Instalar PostgreSQL
 
 
-6- Crear superuser 
+6- Aplicar migraciones
+
+
+7- Crear superuser 
 
 --------------------------------------------------------------------------------
 
@@ -90,7 +93,7 @@ Cuestiones a agregar:
     
 
     Cosas por terminar:
-        -Cambiar base de datos
+        -Cambiar base de datos H
         -Hacer prueba con mercado pago en produccion
         -Implementar modo
         -Revisar INFO PARA CUENTA MAIN  
