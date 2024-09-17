@@ -9,7 +9,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Adherircom', '0007_alter_horariotrabajo_dias_semana'),
+        ('Adherircom', '0006_alter_horariotrabajo_dias_semana_delete_diasemana'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
