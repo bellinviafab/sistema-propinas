@@ -73,22 +73,22 @@ DER:
 ![imagen_2024-09-04_123906290](https://github.com/user-attachments/assets/c1eb086a-4d7d-4aba-bda8-82e81c07ec5d)
 
 
-Cuestiones a agregar:
-  -Actualizar cantidad de comercios y cantidad de usuarios registrados H 
-  -Más opciones de reparto de propina 
-  -Mejorar tema de redireccion de rutas protegidas H
-  -Corregir, que botón guardar funcione como un guardar todo H 
-  -Si ya esta registrado, que rediriga a la cuenta H 
-  -Si ya esta logeado que no figure el log H
-  -Cada empleado debería poder estar relacionado con multiples comercios H
-
-  -Si empleado es eliminado de un comercio, que lo desligue pero que no borre su cuenta H
-
-
-  -Si empleado ya existe en la bd, que pueda ser reutilizado.
-
-  -Ocultar public keys
-    -Solicitud del front para acceder a las keys
+    Cuestiones a agregar:
+      -Actualizar cantidad de comercios y cantidad de usuarios registrados H 
+      -Más opciones de reparto de propina 
+      -Mejorar tema de redireccion de rutas protegidas H
+      -Corregir, que botón guardar funcione como un guardar todo H 
+      -Si ya esta registrado, que rediriga a la cuenta H 
+      -Si ya esta logeado que no figure el log H
+      -Cada empleado debería poder estar relacionado con multiples comercios H
+    
+      -Si empleado es eliminado de un comercio, que lo desligue pero que no borre su cuenta H
+    
+    
+      -Si empleado ya existe en la bd, que pueda ser reutilizado.
+    
+      -Ocultar public keys
+        -Solicitud del front para acceder a las keys
 
     
 
