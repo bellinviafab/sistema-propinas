@@ -72,6 +72,12 @@ DER:
 ------------------------------------------------
 ![imagen_2024-09-04_123906290](https://github.com/user-attachments/assets/c1eb086a-4d7d-4aba-bda8-82e81c07ec5d)
 
+----------------------------------------------------------------
+
+Estructura del Proyecto:
+
+
+
 
     Cuestiones a agregar:
       -Actualizar cantidad de comercios y cantidad de usuarios registrados H 
