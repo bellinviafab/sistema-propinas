@@ -81,9 +81,9 @@ Contexto:
 ------------
 Existen 2 tipos de usuarios en la plataforma:
 
-    -El usuario-comercio: Es aquel que se registra como dueño de un comercio, y registra su comercio y a sus empleados.
+    -Usuario-comercio: Es aquel que se registra como dueño de un comercio, y registra su comercio y a sus empleados.
     
-    -El usuario-empleado: Es aquel cuyo usuario es creado a partir de que el usuario-comercio lo registra. Su usuario será su CUIL y se le envia a su email una contraseña unica (puede ser cambiada)
+    -Usuario-empleado: Es aquel cuyo usuario es creado a partir de que el usuario-comercio lo registra. Su usuario será su CUIL y se le envia a su email una contraseña unica (puede ser cambiada)
     
 ----------------------
 El proyecto consta de 5 apps principales; (Adherircom, Autotask, Cuentamaster, Inicio, MiProppi):
