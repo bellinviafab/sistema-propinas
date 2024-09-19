@@ -98,7 +98,18 @@ El proyecto consta de 5 apps principales; (Adherircom, Autotask, Cuentamaster, I
 
  Views.py:
 -------
- 
+ Maneja las siguientes vistas:
+
+    -creacc (creación de cuenta)
+    -enviarcorreocc   (Envia correo de activación de cuenta)
+    -activar_cuenta (Maneja la vista para activar la cuenta una vez que el usuario-comercio pulsa para activar la cuenta)
+    -regcom (Registración de comercio)
+    -regemp (Registración de cada empleado)
+    -asignaqr (Asigna el qr que los clientes podrán escanear para depositar propinas)
+    -asignaqr_entrada (Asigna otro qr que funciona como checkin que cada usuario-empleado deberá hacer)
+    -crea_user_empleado (Una vez que un empleado es registrado, esta vista se encarga de asignarle los permisos necesarios a este nuevo usuario)
+    -generar_clave_aleatoria (Vista que genera claves aleatorias cuando empleado es registrado)
+    -signout (Cerrar sesión)
 
 
 
