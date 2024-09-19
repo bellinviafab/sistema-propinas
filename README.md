@@ -77,15 +77,35 @@ DER:
 Estructura del Proyecto:
 ------------------------------------------------------------------
 
+Contexto:
+------------
+Existen 2 tipos de usuarios en la plataforma:
+        -El usuario-comercio: Es aquel que se registra como dueño de un comercio, y registra su comercio y a sus empleados.
+        -El usuario-empleado: Es aquel que es registrado a partir de que el usuario-comercio lo registra.
+----------------------
 El proyecto consta de 5 apps principales; (Adherircom, Autotask, Cuentamaster, Inicio, MiProppi):
 
 "Adherircom", "Inicio", "MiProppi" son apps que estan directamente relacionadas con el funcionamiento de la plataforma
 
 "Autotask", "Cuentamaster" son apps para cuestiones internas del sistema (Automatización y actualización de balances)
 
-
     "Adherircom":
-        
+
+        En esta app se encuentra implementado todo lo relacionado a la creación de la cuenta del usuario-comercio
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
