@@ -116,20 +116,20 @@ Models.py:
 Para el modelo usuario, se utiliza la clase User que provee django por default (tanto para usuario-comercio como para usuario-empleado, se diferencian mediante permisos). 
 Se implementan los modelos "UserProfile" ,"Comercio", "Empleado", "Propina", "HorarioTrabajo".
 
-        UserProfile:
-        Este modelo extiende al usuario de Django con un campo extra, cuit, y está relacionado uno a uno con el modelo             User de Django.
-        
-        Comercio:
-        Representa un comercio que tiene un propietario (relación ForeignKey con User) y puede tener varios empleados.             También almacena información importante como nombre, dirección, ingresos y los códigos QR asociados.
-        
-        Propina:   
-        Este modelo guarda la información de las propinas recibidas por un comercio, con un campo de monto y un campo de            fecha. Está relacionado con el modelo Comercio.
-        
-        Empleado:
-        Almacena la información de los empleados, como nombre, CUIL, ingresos y los comercios donde trabaja (relación             ManyToMany con Comercio).
-        
-        HorarioTrabajo:
-        Maneja los horarios de trabajo de los empleados, con un campo dia_semana que indica el día de la semana y                  cantidad_horas para las horas trabajadas.
+UserProfile:
+Este modelo extiende al usuario de Django con un campo extra, cuit, y está relacionado uno a uno con el modelo User de Django.
+
+Comercio:
+Representa un comercio que tiene un propietario (relación ForeignKey con User) y puede tener varios empleados. También almacena información importante como nombre, dirección, ingresos y los códigos QR asociados.
+
+Propina:
+Este modelo guarda la información de las propinas recibidas por un comercio, con un campo de monto y un campo de fecha. Está relacionado con el modelo Comercio.
+
+Empleado:
+Almacena la información de los empleados, como nombre, CUIL, ingresos y los comercios donde trabaja (relación ManyToMany con Comercio).
+
+HorarioTrabajo:
+Maneja los horarios de trabajo de los empleados, con un campo dia_semana que indica el día de la semana y cantidad_horas para las horas trabajadas.
 
 
 
