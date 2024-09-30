@@ -88,7 +88,7 @@ Existen 2 tipos de usuarios en la plataforma:
 ----------------------
 El proyecto consta de 5 apps principales; (Adherircom, Autotask, Cuentamaster, Inicio, MiProppi):
 --------------
-"Adherircom", "Inicio", "MiProppi" son apps que estan directamente relacionadas con el funcionamiento de la plataforma
+"Adherircom", "Inicio", "MiProppi" son apps que estan directamente relacionadas con la interacción de los usuarios.
 
 "Autotask", "Cuentamaster" son apps para cuestiones internas del sistema (Automatización y actualización de balances)
 
