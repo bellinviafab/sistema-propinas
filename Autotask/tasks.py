@@ -147,7 +147,7 @@ def enviacorreo(correo_empleados):
         destinatario = empleado['email']
         clave_unica = empleado['clave_unica']
 
-        mensaje = MIMEText(f'¡Hola {nombre_empleado}! \n Tu clave de acceso a Proppi es : {clave_unica} \n Con ella puedes acceder a multiples funciones dentro de la plataforma. Recuerda que puedes cambiar la clave en todo momento.')
+        mensaje = MIMEText(f'¡Hola {nombre_empleado}! \n Tu clave de acceso a Proppi es : {clave_unica} \n Con ella puedes acceder a multiples funciones dentro de la plataforma. Por tu seguridad te recomendamos cambiar la clave.')
         mensaje['Subject'] = 'Tu clave de acceso a Proppi'
         mensaje['From'] = 'proppiarg@gmail.com'
         mensaje['To'] = destinatario
