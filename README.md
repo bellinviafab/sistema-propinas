@@ -144,7 +144,7 @@ Maneja los horarios de trabajo de los empleados, con un campo dia_semana que ind
 
 
 
-
+----------------
 
     Cuestiones a agregar:
       -Actualizar cantidad de comercios y cantidad de usuarios registrados H 
