@@ -3,7 +3,7 @@ gunicorn
 asgiref==3.8.1
 billiard==4.2.0
 celery==5.4.0
-certifi==2024.2.2
+certifi==2024.8.30
 charset-normalizer==3.3.2
 click==8.1.7
 click-didyoumean==0.3.1
@@ -39,7 +39,7 @@ sqlparse==0.5.1
 tornado==6.4.1
 typing_extensions==4.11.0
 tzdata==2024.1
-urllib3==2.2.1
+urllib3==2.2.3
 vine==5.1.0
 wcwidth==0.2.13
 whitenoise==6.6.0
