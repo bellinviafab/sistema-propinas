@@ -43,7 +43,8 @@ Intrucciones de instalación en entorno local:
 
 DER:
 ------------------------------------------------
-![imagen_2024-09-04_123906290](https://github.com/user-attachments/assets/c1eb086a-4d7d-4aba-bda8-82e81c07ec5d)
+<img width="1756" height="1276" alt="EER proppidb" src="https://github.com/user-attachments/assets/9c70fbf2-eb58-450d-91bf-b33256d52eeb" />
+
 
 ----------------------------------------------------------------
 
