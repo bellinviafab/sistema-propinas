@@ -10,7 +10,6 @@ import hmac, hashlib, binascii, urllib.parse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from decimal import Decimal
-from Cuentamaster.models import *
 
 
 # Create your views here.

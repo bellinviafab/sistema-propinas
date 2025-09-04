@@ -2,61 +2,56 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, TimeInput, inlineformset_factory
 from .models import *
-from django.contrib.auth.models import User
 
-class Def_usuario(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=True)
-    last_name = forms.CharField(max_length=30, required=True)
-    email = forms.EmailField(required=True)
-    cuit = forms.CharField(
-        min_length = 11,
-        max_length = 11,
-        required = True,
-        error_messages={
-            'min_length': 'El CUIT debe tener exactamente 11 dígitos.',
-            'max_length': 'El CUIT debe tener exactamente 11 dígitos.',           
-        }
-    )  # Campo para el CUIT en el formulario
 
+class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'cuit'] 
-
-    def clean_first_name(self):
-        first_name = self.cleaned_data['first_name'] 
-        if not first_name.isalpha():
-            raise forms.ValidationError('El nombre no debe contener números ni caracteres especiales.')
-        return first_name            
-        
-    def clean_last_name(self):
-        last_name = self.cleaned_data['last_name'] 
-        if not last_name.isalpha():
-            raise forms.ValidationError('El apellido no debe contener números ni caracteres especiales.')
-        return last_name   
-
-    def clean_cuit(self):
-        cuit = self.cleaned_data['cuit']
-        if not cuit.isdigit():
-            raise forms.ValidationError('El CUIT debe contener solo dígitos')
-        return cuit
-
-    def save(self, commit=True):
-        user = super().save(commit=False)  
-        user.first_name = self.cleaned_data['first_name']  # Asignar nombre
-        user.last_name = self.cleaned_data['last_name']  # Asignar apellido
-        user.email = self.cleaned_data['email']        # Asignar email
-        user_profile = UserProfile(user=user, cuit=self.cleaned_data['cuit'])  
-        if commit:
-            user.save()
-            user_profile.save()
-        return user
-
+        fields = ('username','first_name','last_name','email','password1','password2')
+    
 
 
 class Registrocomercio(ModelForm):
     class Meta:
         model = Comercio
-        fields = ['nombre_comercio','tipo_comercio','direccion','ciudad','provincia']
+        fields = ['nombre_comercio', 'tipo_comercio', 'nombre_calle', 'numero_calle', 'ciudad']
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        nombre_comercio = cleaned_data.get('nombre_comercio', '')
+        nombre_calle = cleaned_data.get('nombre_calle', '')
+        numero_calle = cleaned_data.get('numero_calle', '')
+        ciudad = cleaned_data.get('ciudad', '').id
+
+        if not nombre_comercio:
+            self.add_error('nombre_comercio', 'Este campo es obligatorio.')
+        if not nombre_calle:
+            self.add_error('nombre_calle', 'Este campo es obligatorio.')
+        if not numero_calle:
+            self.add_error('numero_calle', 'Este campo es obligatorio.')
+        if not ciudad:
+            self.add_error('ciudad', 'Este campo es obligatorio.')
+
+        
+        # Validar que no exista un comercio con el mismo nombre, calle y número
+        if nombre_comercio and nombre_calle and numero_calle:
+            existe = Comercio.objects.filter(
+                nombre_comercio__iexact=nombre_comercio,
+                nombre_calle__iexact=nombre_calle,
+                numero_calle=numero_calle
+            ).exists()
+            if existe:
+                raise forms.ValidationError(
+                    'Ya existe un comercio con ese nombre en la misma calle y número.'
+                )
+
+        return cleaned_data
+    
+
+
+
+""""
 
 class Registroempleado(ModelForm):
     class Meta:
@@ -115,4 +110,4 @@ class HorarioTrabajoForm(forms.Form):
         if not dia_seleccionado:
             raise forms.ValidationError('Debes seleccionar al menos un día y asignarle un horario valido')
         
-        return cleaned_data
+        return cleaned_data"""

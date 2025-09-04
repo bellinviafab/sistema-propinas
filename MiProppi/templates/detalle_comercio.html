@@ -29,7 +29,7 @@
 
         {% if perms.Adherircom.change_comercio %}
             <div class="botones-accion">
-                <a href="#" class="btn">Información del Comercio</a>
+                <a href="#" class="btn">Estadisticas</a>
                 <a href="{% url 'agregar_emp' comercio.id %}" class="btn">Agregar un Empleado</a>
                 <a href="{% url 'eliminar_emp' comercio.id %}" class="btn">Eliminar un Empleado</a>
                 <a href="#" class="btn">Modificar Información del Comercio</a>
@@ -38,8 +38,8 @@
 
         <div class="informacion-comercio">
             <h3>Información del Comercio</h3>
-            <p><strong>Dirección:</strong> {{ comercio.direccion }}</p>
-            <p><strong>Propina Recaudada Hoy:</strong> ${{ comercio.ingresos_diarios }}</p>
+            <p><strong>Dirección:</strong> {{ comercio.nombre_calle }} {{ comercio.numero_calle }}</p>
+            <p><strong>Propina Recaudada hoy:</strong> ${{ ingreso_diario.total_diario }}</p>
             <p><strong>Propina Total Recaudada:</strong> ${{ comercio.ingresos_total }}</p>
             <p><strong>Cantidad de Empleados:</strong> {{ comercio.empleados.count }}</p>
         </div>
@@ -47,8 +47,8 @@
         <div class="lista-empleados">
             <h3>Empleados del Comercio</h3>
             <ul>
-                {% for empleado in comercio.empleados.all %}
-                <li>{{ empleado.nombre }} - Alias: {{ empleado.alias }} - CUIL: {{ empleado.cuil }}</li>
+                {% for asig in asignacion %}
+                    <li>{{ asig.id_empleado.user.first_name }} {{ asig.id_empleado.user.last_name}} - Alias: {{ asig.id_empleado.alias }} - CUIL: {{ asig.id_empleado.user }}</li>
                 {% endfor %}
             </ul>
         </div>

@@ -5,14 +5,13 @@ from Adherircom.models import *
 from MiProppi.models import *
 from decimal import Decimal
 from django.db.models import Sum
-from Cuentamaster.models import *
 import mercadopago
 from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta, datetime
 from django.db import transaction
 from email.mime.text import MIMEText
-
+""""
 @shared_task
 def calcular_propinas():
     try:
@@ -69,6 +68,7 @@ def calcular_tothoras_trabajadas(empleados, comercio, fecha_hoy):
             total_horas += float(horario.cantidad_horas)
     return total_horas    
 
+
 def calcular_horaspor_empleado(empleado, comercio, fecha_hoy):
     horas_trabajadas = 0
     checkinouts = CheckInOut.objects.filter(
@@ -81,24 +81,17 @@ def calcular_horaspor_empleado(empleado, comercio, fecha_hoy):
         horario = HorarioTrabajo.objects.get(empleado=empleado, dia_semana=checkinout.hora_entrada.weekday())
         horas_trabajadas += float(horario.cantidad_horas)
     return horas_trabajadas
-
+"""
 def distribuye_propina(empleado, propina_empleado, comercio, porcentaje_plataforma):
     empleado.ingresos_diarios += propina_empleado - porcentaje_plataforma
     empleado.ingresos_total += propina_empleado - porcentaje_plataforma
     comercio.ingresos_total += propina_empleado
     comercio.reset_ingresos_diarios()
-    cuenta = cuentamain.objects.get(id=1)
-    cuenta.ingresosproppi += porcentaje_plataforma
-    cuenta.totingresos += porcentaje_plataforma
     with transaction.atomic():
         empleado.save()
         comercio.save()
-        cuenta.save()
 
 def enviar_dinero():
-    #Obteniendo la cuenta principal de la plataforma
-    cuenta_principal = cuentamain.objects.get(id=1)
-
     #Obtener todos los empleados que tienen ingresos diarios para transferir
     empleados = Empleado.objects.filter(ingresos_diarios__gt=0)
 
@@ -125,7 +118,6 @@ def enviar_dinero():
             if transfer["status"] == "approved":
                 print(f"Pago a {empleado.nombre} exitosa")
                 #Actualizar balance del empleado y de la cuentamaster
-                cuenta_principal.totingresos-=empleado.ingresos_diarios
                 empleado.ingresos_diarios = Decimal('0.00')
                 empleado.save()
             else:

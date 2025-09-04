@@ -38,6 +38,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
@@ -46,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Inicio' ,'MiProppi', 'Adherircom', 'Cuentamaster', 'Autotask',
+    'Inicio' ,'MiProppi', 'Adherircom', 'Autotask',
     'django_celery_beat'
 ]
 
@@ -105,12 +106,12 @@ CACHES = {
 
 DATABASES = {
    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Motor de base de datos para PostgreSQL
-        'NAME': 'proppi_db',       # Nombre de la base de datos
-        'USER': 'postgres',                       # Nombre de usuario de la base de datos
-        'PASSWORD': config('DB_PASSWORD'),                # Contraseña del usuario
+        'ENGINE': 'django.db.backends.mysql',  # Motor de base de datos para mySQL
+        'NAME': 'proppidb',       # Nombre de la base de datos
+        'USER': 'root',                       # Nombre de usuario de la base de datos
+        'PASSWORD': '9752',                # Contraseña del usuario
         'HOST': 'localhost',                        # Host donde está la base de datos (puede ser una IP o un dominio)
-        'PORT': '5432',                             # Puerto de PostgreSQL (por defecto es 5432)
+        'PORT': '3306',                             # Puerto de mySQL (por defecto es 3306)
     }
 }
 

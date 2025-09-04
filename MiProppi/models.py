@@ -4,7 +4,7 @@ from django.utils import timezone
 from datetime import timedelta
 
 # Create your models here.
-class CheckInOut(models.Model):
+"""class CheckInOut(models.Model):
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, related_name='checkinouts')
     comercio = models.ForeignKey(Comercio, on_delete=models.CASCADE)
     hora_entrada = models.DateTimeField()
@@ -23,4 +23,4 @@ class CheckInOut(models.Model):
         super(CheckInOut, self).save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.empleado.nombre} - {self.comercio.nombre_comercio} - {self.hora_entrada} to {self.hora_salida}"
+        return f"{self.empleado.nombre} - {self.comercio.nombre_comercio} - {self.hora_entrada} to {self.hora_salida}" """

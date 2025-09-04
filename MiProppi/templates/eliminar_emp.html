@@ -20,7 +20,7 @@
                     <li class="employee-item">
                         <div class="employee-details">
                             <h3>Empleado</h3>
-                            <p>{{ empleado.nombre }} - {{ empleado.cuil }}</p>
+                            <p>{{ empleado.id_empleado.user.first_name }} {{ empleado.id_empleado.user.last_name }}</p>
                         </div>
                         <form method="POST" action="{% url 'eliminar_emp' comercio_id=comercio.id %}">
                             {% csrf_token %}
