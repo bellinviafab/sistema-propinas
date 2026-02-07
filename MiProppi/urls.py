@@ -13,6 +13,7 @@ urlpatterns = [
     path('Miproppi/mis_comercios/eliminar_emp/<int:comercio_id>', views.eliminar_emp, name = 'eliminar_emp'),
     path('Proppiempleado/login/', views.login_empleado, name='login_empleado'),
     path('Proppi/perfil/',views.perfil, name='perfil'),
+    path('Proppi/perfil_config/', views.config_empleado, name='config_empleado'),
     path('Proppi/recuperar_contraseña', views.recuperar_contraseña, name='recuperar_contraseña'),
     path('Proppi/cambiar_contrasena/', views.cambiar_contrasena, name='cambiar_contrasena')
 ]   

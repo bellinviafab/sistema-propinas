@@ -14,8 +14,7 @@
     <div class="wrapper-container">
 
         <div class="wrapper">
-            {% if is_empleado %}
-            <h1>Hola {{ empleado.nombre }}</h1>
+            <h1>Hola {{ user.first_name }}</h1>
             <div class="botones-accion">
                 <a href="{% url 'mis_comercios' %}" class="btn">Comercios</a>
                 <a href="{% url 'config_empleado' %}" class="btn">Configurar perfil</a>
@@ -24,19 +23,6 @@
                 <p><strong>Haz recaudado:</strong> ${{ empleado.ingresos_diarios }}<strong> de propina en total</strong></p>
                 <p><strong>Propina recaudada hoy:</strong> ${{ empleado.ingresos_total }}</p>
             </div>
-            {% elif is_dueno %}
-                <h1>Hola {{ dueno.first_name }}</h1>
-                <div class="botones-accion">
-                    <a href="{% url 'mis_comercios' %}" class="btn">Comercios</a>
-                    <a href="{% url 'perfil_usercom_config' %}" class="btn">Configurar perfil</a>
-                </div>
-                <div class="informacion-comercio">
-                    {% for comercio in user.comercios.all %}
-                        <p><strong>{{ comercio.nombre_comercio }} ha recaudado:</strong> ${{ comercio.ingresos_total }}<strong> de propina en total</strong></p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
 
         </div>
 

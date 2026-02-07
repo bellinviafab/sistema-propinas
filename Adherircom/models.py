@@ -62,7 +62,7 @@ class Comercio(models.Model):
     ciudad = models.ForeignKey(Ciudad, on_delete = models.SET_NULL, null = True)
 
     def __str__(self):
-        return f"{self.nombre_comercio} + ' - ' + {self.propietario.identificador}"
+        return f"{self.nombre_comercio}  -  {self.propietario.username}"
     
     def reset_ingresos_diarios(self):
         self.ingresos_diarios=0
@@ -100,23 +100,23 @@ DIAS_SEMANA_CHOICES = [
         (6, 'Domingo')
 ]
 
-class HorarioTrabajo(models.Model):
-    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
-    comercio = models.ForeignKey(Comercio, on_delete=models.CASCADE)
-    dia_semana = models.IntegerField(choices=DIAS_SEMANA_CHOICES)
-    cantidad_horas = models.DecimalField(max_digits=4, decimal_places=2, default=0)
-
-    def __str__(self):
-        dia = dict(DIAS_SEMANA_CHOICES).get(self.dia_semana)
-        return f"{self.empleado.user.first_name} - {dia} ({self.cantidad_horas} horas)"
-
-class TieneAsignado(models.Model):
+class TieneAsignado(models.Model): 
     id_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     id_comercio = models.ForeignKey(Comercio, on_delete=models.CASCADE)
     fecha_ingreso = models.DateField()
 
     class Meta:
         unique_together = ('id_empleado','id_comercio','fecha_ingreso')
+
+class HorarioTrabajo(models.Model):  #HorarioTrabajo->tieneAsignado
+    asignacion = models.ForeignKey(TieneAsignado, on_delete=models.CASCADE)
+    dia_semana = models.IntegerField(choices=DIAS_SEMANA_CHOICES)
+    cantidad_horas = models.DecimalField(max_digits=4, decimal_places=2, default=0)
+
+    def __str__(self):
+        dia = dict(DIAS_SEMANA_CHOICES).get(self.dia_semana)
+        return f"{self.asignacion.id_empleado.user.first_name} - {dia} ({self.cantidad_horas} horas)"
+
 
 class RepartoPropina(models.Model):
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)

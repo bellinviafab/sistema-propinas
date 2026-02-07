@@ -127,16 +127,16 @@ def agregar_emp(request, comercio_id):
                         user=user,
                         alias = emp_form.cleaned_data['alias'],
                     )
-                    TieneAsignado.objects.create(
+                    asignacion = TieneAsignado.objects.create(
                         id_comercio = comercio_obj,
                         id_empleado = empleado,
                         fecha_ingreso = timezone.now()
                     )
+                    asignacion.save()
                     for i in range(7):
                         if request.POST.get(f'dia_{i}') and request.POST.get(f'cantidad_horas_{i}'):
                             horario = HorarioTrabajo(
-                                empleado = empleado,
-                                comercio = comercio_obj,
+                                asignacion = asignacion,
                                 dia_semana = i,
                                 cantidad_horas = request.POST.get(f'cantidad_horas_{i}'),
                             )
@@ -185,7 +185,7 @@ def eliminar_emp(request, comercio_id):
         empleado_id = request.POST.get('empleado_id')
         try: 
             print("busca eliminar")
-            if elimina_empleado_de_comercio(empleado_id) :
+            if elimina_empleado_de_comercio(empleado_id, comercio_id) :
                 return render(request, 'eliminar_emp.html', {
                     'comercio': comercio_obj,
                     'empleados': empleados,
@@ -204,13 +204,15 @@ def eliminar_emp(request, comercio_id):
                 'message' : "No se pudo eliminar el empleado, intentalo nuevamente"
             })
 
-def elimina_empleado_de_comercio(empleado_id):
+def elimina_empleado_de_comercio(empleado_id, comercio_id): #Primero Elimina horarios, luego asignacion. Empleado no se elimina del sistema.
     try:
-        empleado = Empleado.objects.get(id=empleado_id)
-        #Agregar confirmacion de eliminacion
-        empleado.delete()
+        empleado = Empleado.objects.get(id=empleado_id) #Agregar confirmacion de eliminacion
+        asignacion = TieneAsignado.objects.filter(id_empleado=empleado, id_comercio=comercio_id)
+        asignacion.delete()
+        print("Horarios eliminados")
+        print("Empleado eliminado del comercio")
         return True
-    except Empleado.DoesNotExist:
+    except (Empleado.DoesNotExist, TieneAsignado.DoesNotExist):
         return False
     
 
@@ -242,43 +244,26 @@ def login_empleado(request):
                 })
 
 
-"""@login_required
-@permission_required("MiProppi.add_checkinout")
-def configurar_perfil(request): #Corregir excepciones
-    empleado = get_object_or_404(Empleado, user=request.user)  # Asumiendo que el modelo Empleado tiene una relación con el User
-    if request.method == 'GET':
-        form = ConfigurarPerfilForm(instance=empleado)
-        return render(request, 'perfil_empleado_config.html', {
-            'form': form,
-            'empleado': empleado  # Asegúrate de que 'empleado' está incluido en el contexto
-        })
-    else:
-        if request.method == 'POST':
-            form = ConfigurarPerfilForm(request.POST, instance=empleado)
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Cambios realizados con éxito.')
-                return redirect('config_empleado')  # Redirige a una página de confirmación o al perfil del usuario
-            else:
-                print("Errores:", form.errors)
-
-    return render(request, 'perfil_empleado_config.html', {
-        'form': form})"""
-
 
 #Comunes a ambos usuarios
 @login_required
 def perfil(request):
-    context = {}
+    if request.method=='GET':
+        if request.user.groups.filter(name='usuario-empleado').exists():
+            empleado = Empleado.objects.filter(user=request.user).first()
+            return render(request, 'perfil.html', {
+                'empleado': empleado,
+            }
+            )
 
-    if request.user.groups.filter(name='usuario-empleado').exists():
-        empleado = get_object_or_404(Empleado, user=request.user)
-        context['empleado'] = empleado
-        context['is_empleado'] = True
-    elif request.user.groups.filter(name='usuario-comercio').exists():
-        context['dueno'] = request.user
-        context['is_dueno'] = True
-    return render(request, 'perfil.html', context )
+@login_required
+@permission_required("auth.change_user")
+def config_empleado(request): #Corregir excepciones
+    if request.method == 'GET':
+        return render (request, 'perfil_empleado_config.html', {})
+
+
+
 
 @login_required
 @permission_required("Adherircom.view_comercio")
@@ -320,6 +305,9 @@ def cambiar_contrasena(request):
 
 def recuperar_contraseña(request):
     return render(request, 'recuperar_contraseña.html')
+
+
+
 
 ##Fuera del MVP##
 
