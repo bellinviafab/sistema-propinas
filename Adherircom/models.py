@@ -6,6 +6,8 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+from core.models import Ciudad,Provincia
+from accounts.models import Empleado, Propietario
 
 
 
@@ -16,38 +18,6 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 
     def __str__(self):
         return self.user.username"""
-
-
-class Provincia(models.Model):
-    nombre = models.CharField(max_length=100, unique= True)
-
-    def __str__(self):
-        return self.nombre
-
-class Ciudad(models.Model):
-    nombre = models.CharField(max_length=100)
-    provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ('nombre', 'provincia')
-
-    def __str__(self):
-        return f"{self.nombre}, {self.provincia.nombre}"
-    
-rol_choices = {
-        ('propietario','Propietario'),
-        ('empleado', 'Empleado'),
-    }
-
-class Propietario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nombre_ciudad = models.ForeignKey(Ciudad, on_delete=models.SET_NULL, null = True)
-
-
-
-class Empleado(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null = False)
-    alias = models.CharField(max_length=30)
 
 
 class Comercio(models.Model):
