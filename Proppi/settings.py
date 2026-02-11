@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Inicio' ,'MiProppi', 'Adherircom', 'Autotask', 'core' , 'accounts',
+    'core' , 'accounts', 'businesses', 'staff', 'payments', 'web',
     'django_celery_beat'
 ]
 

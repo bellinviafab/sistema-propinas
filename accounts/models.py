@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from core.models import Ciudad, Provincia
+
 
 # Create your models here.
 rol_choices = {
@@ -10,7 +10,7 @@ rol_choices = {
 
 class Propietario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nombre_ciudad = models.ForeignKey(Ciudad, on_delete=models.SET_NULL, null = True)
+    nombre_ciudad = models.ForeignKey('core.Ciudad', on_delete=models.SET_NULL, null = True)
 
 
 
