@@ -1,0 +1,124 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 viewport-fit=cover">
+  <title>Proppi</title>
+  <link rel="stylesheet" href="{% static '/styles/base.css' %}">
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.ico' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+
+  <nav class="navbar">
+    <div class="navbar__container">
+      <a href="{% url 'inicio' %}" id="navbar__logo">Proppi</a>
+        <div class="navbar__toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+
+        <ul class="navbar__menu">
+          {% if user.is_authenticated %}
+            {% if perms.Adherircom.add_comercio %}
+              <li class="navbar__item">
+                <a href="" class="navbar__links" id="miproppi-page">Mi Proppi</a>
+              </li>
+              <li class="navbar__item">
+                <a href="" class="navbar__links" id="adherircom-page">Agregá tu comercio</a>
+              </li>
+              <li class="navbar__item">
+                <a href="" class="navbar__links" id="support-page">Contactar soporte</a>
+              </li>
+              <li class="navbar__item">
+                <a href= class="navbar__links" id="close-page">Cerrar Sesión</a>
+              </li>
+            {% else %} 
+                <li class="navbar__item">
+                  <a href="" class="navbar__links" id="perfil-page">Perfil</a>
+                </li>
+                <li class="navbar__item">
+                  <a href="" class="navbar__links" id="miproppi-page">Mi Proppi</a>
+                </li>
+                <li class="navbar__item">
+                  <a href="" class="navbar__links" id="support-page">Contactar soporte</a>
+                </li>
+                <li class="navbar__item">
+                  <a href= class="navbar__links" id="close-page">Cerrar Sesión</a>
+                </li>
+            {% endif %}
+          {% else %}
+            <li class="navbar__item">
+              <a href="" class="navbar__links" id="about-page">Mi Proppi</a>
+            </li>
+            <li class="navbar__item">
+              <a href="" class="navbar__links" id="miproppi-page">Empleados</a>
+            </li>
+            <li class="navbar__item">
+              <a href="" class="navbar__links" id="about-page">FAQ</a>
+            </li>
+            <li class="navbar__btn">
+              <a href="{% url 'crear_cuenta' %}" class="button" id="signup-page">Registrate</a>
+            </li>
+          {% endif %}
+        </ul>
+    </div>
+  </nav>
+
+  {% block content %}
+  {% endblock %} 
+
+  <!--Footer section-->
+  <div class="footer__container">
+    <div class="footer__links">
+      <div class="footer__link--wrapper">
+        <div class="footer__link--items">
+          <h2>Sobre Nosotros</h2>
+          <a href="">Cómo funciona</a> <a href="/">Testimonios</a>
+          <a href="/">Términos de servicio</a>
+        </div>
+        <div class="footer__link--items">
+          <h2>Contáctanos</h2>
+          <a href="">Contacto</a> <a href="/">Soporte</a>
+        </div>
+      </div>
+      <div class="footer__link--wrapper">
+        <div class="footer__link--items">
+          <h2>Redes</h2>
+          <a href="/">Instagram</a>
+          <a href="/">Linkedin</a>
+          <a href="/">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <section class="social__media">
+      <div class="social__media--wrap">
+        <div class="footer__logo">
+          <a href="{% url 'inicio' %}" id="footer__logo">Proppi</a>
+        </div>
+        <p class="website__rights">© Proppi 2024. Todos los derechos reservados</p>
+        <div class="social__icons">
+          <a href="/" class="social__icon--link" target="_blank"
+            ><i class="fab fa-tiktok"></i
+          ></a>
+          <a href="/" class="social__icon--link"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="/" class="social__icon--link"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="{% static '/js/script.js' %}"></script>
+  
+
+
+</body>
+</html>

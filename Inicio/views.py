@@ -13,8 +13,7 @@ from decimal import Decimal
 
 
 # Create your views here.
-def index(request):
-    return render(request, 'index.html')
+
 
 access_token = settings.MERCADO_PAGO_ACCESS_TOKEN
 sdk = mercadopago.SDK(access_token)
