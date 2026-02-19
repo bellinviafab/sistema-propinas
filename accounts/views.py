@@ -14,6 +14,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
 
 # Create your views here.
 def crearcc(request):
@@ -88,6 +90,42 @@ def activar_cuenta(request, uidb64, token):
     else:
         return render(request, 'accounts/activacion_invalida.html')  # Muestra una página de error de activación inválida
 
+def signin(request): #Comprobar en base de datos si datos existen  Añadir olvide contraseña
+    if request.method == 'GET':
+        form = AuthenticationForm()
+        return render(request, 'accounts/login.html', {
+        'form' : form
+        })
+    else:
+        user = authenticate(
+            request, username=request.POST['username'], password=request.POST
+            ['password'])
+        if user is None:
+            return render(request, 'accounts/login.html', {
+                'form' : AuthenticationForm,
+                'error' : 'Usuario y/o contraseña son incorrectos'
+            })
+        else: #Verifica que pertenezca al grupo usuario-comercio o al usuario-empleado
+            if user.groups.filter(name='usuario-comercio').exists():
+                login(request,user)
+                return redirect('inicio')
+            else:
+                if user.groups.filter(name='usuario-empleado').exists():
+                    login(request,user)
+                    return redirect('inicio')
+                else:
+                    return render(request, 'accounts/login.html', {
+                    'form' : AuthenticationForm,
+                    'error': 'No tienes permisos para acceder como comercio o empleado.'
+                    })
+
 def signout(request):
      logout(request)
      return redirect('inicio')
+
+
+            
+            
+            
+            
+            

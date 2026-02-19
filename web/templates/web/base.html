@@ -48,18 +48,15 @@
                   <a href="" class="navbar__links" id="support-page">Contactar soporte</a>
                 </li>
                 <li class="navbar__item">
-                  <a href= class="navbar__links" id="close-page">Cerrar Sesión</a>
+                  <a href="" class="navbar__links" id="close-page">Cerrar Sesión</a>
                 </li>
             {% endif %}
           {% else %}
             <li class="navbar__item">
-              <a href="" class="navbar__links" id="about-page">Mi Proppi</a>
+              <a href="{% url 'login' %}" class="navbar__links" id="about-page">Mi Proppi</a>
             </li>
             <li class="navbar__item">
-              <a href="" class="navbar__links" id="miproppi-page">Empleados</a>
-            </li>
-            <li class="navbar__item">
-              <a href="" class="navbar__links" id="about-page">FAQ</a>
+              <a href="{% url 'faq' %}" class="navbar__links" id="about-page">FAQ</a>
             </li>
             <li class="navbar__btn">
               <a href="{% url 'crear_cuenta' %}" class="button" id="signup-page">Registrate</a>
