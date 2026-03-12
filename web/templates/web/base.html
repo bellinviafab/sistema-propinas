@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0 viewport-fit=cover">
   <title>Proppi</title>
   <link rel="stylesheet" href="{% static '/styles/base.css' %}">
+  {% block extra_css %}
+  {% endblock %}
   <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.ico' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -21,12 +23,24 @@
           <span class="bar"></span>
           <span class="bar"></span>
         </div>
+        
+        {% if messages %}
+            <div class="messages-wrapper">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+
 
         <ul class="navbar__menu">
           {% if user.is_authenticated %}
-            {% if perms.Adherircom.add_comercio %}
+            {% if user.propietario %}
               <li class="navbar__item">
-                <a href="" class="navbar__links" id="miproppi-page">Mi Proppi</a>
+                <a href="{% url 'ver_perfil' %}" class="navbar__links" id="miproppi-page">Mi Proppi</a>
               </li>
               <li class="navbar__item">
                 <a href="" class="navbar__links" id="adherircom-page">Agregá tu comercio</a>
@@ -35,20 +49,17 @@
                 <a href="" class="navbar__links" id="support-page">Contactar soporte</a>
               </li>
               <li class="navbar__item">
-                <a href= class="navbar__links" id="close-page">Cerrar Sesión</a>
+                <a href="{% url 'logout' %}" class="navbar__links" id="close-page">Cerrar Sesión</a>
               </li>
-            {% else %} 
+            {% elif user.empleado %} 
                 <li class="navbar__item">
-                  <a href="" class="navbar__links" id="perfil-page">Perfil</a>
-                </li>
-                <li class="navbar__item">
-                  <a href="" class="navbar__links" id="miproppi-page">Mi Proppi</a>
+                  <a href="{% url 'ver_perfil' %}" class="navbar__links" id="miproppi-page">Mi Proppi</a>
                 </li>
                 <li class="navbar__item">
                   <a href="" class="navbar__links" id="support-page">Contactar soporte</a>
                 </li>
                 <li class="navbar__item">
-                  <a href="" class="navbar__links" id="close-page">Cerrar Sesión</a>
+                  <a href="{% url 'logout' %}" class="navbar__links" id="close-page">Cerrar Sesión</a>
                 </li>
             {% endif %}
           {% else %}

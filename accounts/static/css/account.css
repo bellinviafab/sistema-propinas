@@ -1,0 +1,556 @@
+/* Estilos para el contenedor principal del login */
+.login-wrapper-container {
+    font-family: 'Kumbh Sans', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Asegúrate de que cubra toda la pantalla */
+    padding: 0 20px; /* Espaciado opcional */
+}
+
+/* Estilos para el formulario */
+.login-wrapper {
+    width: 420px; /* Ancho máximo del formulario */
+    background: #009EE3;
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.login-wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.login-wrapper .login-input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.login-wrapper .login-input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+}
+
+.login-wrapper .login-input-box input::placeholder {
+    color: #fff;
+}
+
+.login-wrapper .login-input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.login-wrapper .login-remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+}
+
+.login-wrapper .login-remember-forgot label input {
+    accent-color: #fff;
+    margin-right: 3px;
+}
+
+.login-remember-forgot a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.login-wrapper .login-remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.login-wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.login-wrapper .login-register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.login-wrapper .login-register-link p a {
+    color: #fff;
+    text-decoration: none; 
+    font-weight: 600;
+}
+
+.login-wrapper .login-register-link p a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries para Responsividad */
+@media screen and (max-width: 768px) {
+    .login-wrapper {
+        width: 90%; /* Ancho más flexible en pantallas pequeñas */
+        padding: 20px; /* Menos padding */
+    }
+
+    .login-wrapper h1 {
+        font-size: 28px; /* Tamaño de fuente más pequeño */
+    }
+
+    .login-wrapper .login-input-box input {
+        font-size: 14px; /* Ajuste del tamaño de fuente */
+    }
+
+    .login-wrapper .btn {
+        height: 40px; /* Ajustar la altura del botón */
+        font-size: 14px; /* Tamaño de fuente más pequeño */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .login-wrapper {
+        padding: 15px; /* Menos padding */
+    }
+
+    .login-wrapper h1 {
+        font-size: 24px; /* Tamaño de fuente aún más pequeño */
+    }
+
+    .login-wrapper .login-input-box input {
+        font-size: 12px; /* Ajuste del tamaño de fuente */
+    }
+
+    .login-wrapper .btn {
+        height: 35px; /* Ajustar la altura del botón */
+        font-size: 12px; /* Tamaño de fuente más pequeño */
+    }
+
+    .login-wrapper .login-register-link {
+        font-size: 12px; /* Tamaño de fuente más pequeño */
+    }
+}
+
+
+/* Confirmar cuenta */
+.wrapper-container {
+    font-family: 'Kumbh Sans', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 750px; /* Ancho máximo del contenedor */
+    background: #009EE3;
+    border: 2px solid #009EE3;
+    border-radius: 10px;
+    color: #fff;
+    padding: 40px 35px 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; /* Centrando el texto del h1 */
+}
+
+.wrapper h1 {
+    font-size: 28px; /* Tamaño de fuente más grande */
+    margin: 0; /* Elimina el margen por defecto del h1 */
+    line-height: 1.2; /* Ajusta el interlineado para una mejor legibilidad */
+}
+
+/* Registro */
+/* estilo register */
+.reg-container {
+    font-family: 'Kumbh Sans', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.reg-wrapper {
+    width: 100%;
+    max-width: 750px; /* Ancho máximo del contenedor */
+    background: #009EE3;
+    border: 2px solid #009EE3;
+    border-radius: 10px;
+    color:#fff;
+    padding: 40px 35px 55px;
+}
+
+.reg-wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reg-error-message {
+    color: #ff4d4d; /* Rojo para indicar error */
+    background-color: #ffe6e6; /* Fondo ligeramente rojo */
+    border: 1px solid #ff4d4d; /* Borde rojo */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espacio debajo del mensaje */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 14px; /* Tamaño de fuente */
+}
+
+.reg-error-message p {
+    margin: 5px 0; /* Margen interno para cada mensaje */
+}
+
+.reg-error-message strong {
+    font-weight: bold; /* Negrita para el nombre del campo */
+}
+
+
+.reg-wrapper .reg-input-box {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: #009EE3;
+    margin-bottom: 20px;
+}
+
+.reg-input-box .reg-input-field {
+    position: relative;
+    width: 100%;
+    margin: 13px 0;
+}
+
+.reg-input-box .reg-input-field input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 6px;
+    padding: 15px 15px 15px 40px;
+}
+
+.reg-input-box .reg-input-field input::placeholder {
+    color:#fff; 
+}
+
+.reg-input-box .reg-input-field i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.reg-wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgb(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Media queries para pantallas medianas */
+@media (min-width: 600px) {
+    .reg-input-box .reg-input-field {
+        width: 48%; /* En pantallas medianas, dos campos en una fila */
+    }
+}
+
+/* Media queries para pantallas grandes */
+@media (min-width: 1024px) {
+    .reg-wrapper h1 {
+        font-size: 36px;
+    }
+}
+
+/* Perfil */
+/* ==================================================
+   4. ESTILOS ESPECÍFICOS: PERFIL (perfil.html)
+   ================================================== */
+.perfil-wrapper-container {
+    font-family: 'Kumbh Sans', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.perfil-wrapper {
+    width: 100%;
+    max-width: 450px; /* Más angosto que el registro para formato tarjeta */
+    background: #009EE3;
+    border: 2px solid #009EE3;
+    border-radius: 10px;
+    color: #fff;
+    padding: 40px 35px;
+}
+
+/* Separamos el header del body porque ahora el header usa Flexbox */
+.perfil-body {
+    text-align: center;
+}
+
+.perfil-header {
+    display: flex;
+    align-items: center; /* Alinea verticalmente la foto y el texto */
+    justify-content: center; /* Mantiene todo en el medio de la tarjeta */
+    gap: 20px; /* Espacio entre la foto y el nombre */
+}
+
+/* Diseño circular para la foto de perfil */
+.perfil-avatar {
+    width: 80px; /* Lo achicamos un poco para que quede bien al lado del texto */
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    /* Eliminamos el margin-bottom porque ahora está al lado, no arriba */
+}
+
+.perfil-header h1 {
+    font-size: 28px;
+    margin: 0; /* Quitamos el margen para que se alinee perfecto con la foto */
+}
+
+
+/* Línea divisoria sutil */
+.perfil-divisor {
+    border: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 25px 0;
+}
+
+/* Alineación de los botones */
+.botones-accion {
+    display: flex;
+    flex-direction: column; /* Apila los botones uno arriba del otro */
+    gap: 15px; /* Espacio entre botones */
+    margin-top: 25px;
+}
+
+/* Estilo para el botón secundario (Fondo transparente con borde blanco) */
+.btn-secundario {
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex; /* Centrar texto vertical y horizontalmente */
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn-secundario:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Editar perfil */
+/* ==================================================
+   5. ESTILOS ESPECÍFICOS: EDITAR PERFIL
+   ================================================== */
+.edit-perfil-container {
+    font-family: 'Kumbh Sans', sans-serif;
+    background: #000000;
+    background: linear-gradient(to right, #161616, #000000);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.edit-perfil-wrapper {
+    width: 100%;
+    max-width: 550px;
+    background: #009EE3;
+    border: 2px solid #009EE3;
+    border-radius: 10px;
+    color: #fff;
+    padding: 40px 35px;
+}
+
+.edit-perfil-wrapper .login-input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px; /* Espacio entre los campos */
+}
+
+.edit-perfil-wrapper .login-input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px; /* Bordes bien redondeados */
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px; /* El 45px es para dejarle lugar al ícono */
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* El ícono posicionado a la derecha */
+.edit-perfil-wrapper .login-input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #fff;
+}
+
+/* Estética específica para los campos que no se pueden editar (Nombre, Apellido, Email) */
+.edit-perfil-wrapper .login-input-box input[readonly] {
+    background: rgba(255, 255, 255, 0.05); /* Le damos un fonde apenitas blanco/gris */
+    color: #b0b0b0; /* Texto gris claro */
+    border-color: rgba(255, 255, 255, 0.1); /* Borde más suave */
+    cursor: not-allowed;
+}
+
+.edit-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+/* Estilos para los campos de solo lectura (Nombre, Apellido, Email) */
+.edit-perfil-wrapper input[readonly] {
+    background-color: #e9ecef; /* Un fondo levemente gris */
+    color: #6c757d; /* Texto gris oscuro para denotar que no se puede editar */
+    cursor: not-allowed;
+}
+
+/* Mensaje informativo para el propietario */
+.edit-mensaje-protegido {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 25px;
+    color: #f1f1f1;
+}
+
+/* Botones de acción (Guardar cambios, Cambiar contraseña) */
+/* Cartel de errores dinámico */
+.alert-error-container {
+    background-color: rgba(255, 255, 255, 0.575);
+    border-left: 5px solid #ff4d4d;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.error-header {
+    color: #333;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+
+.error-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.error-list li {
+    color: #d93025;
+    font-size: 13px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.error-list li::before {
+    content: "•";
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.separator-top {
+    margin-top: 15px;
+}
+
+.messages-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999; /* Para que esté por encima de todo */
+    width: 300px;
+}
+
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Colores Proppi */
+.alert-success {
+    background-color: #28a745; /* Verde éxito */
+    border-left: 5px solid #1e7e34;
+}
+
+.alert-error, .alert-danger {
+    background-color: #dc3545; /* Rojo error */
+    border-left: 5px solid #bd2130;
+}
+
+/* Animación para que entre de costado */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}

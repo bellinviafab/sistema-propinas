@@ -2,8 +2,8 @@ import smtplib
 from django.contrib.auth.models import Group, User
 from django.shortcuts import redirect, render
 from Proppi import settings
-from .forms import CustomUserCreationForm
-from django.contrib.auth import login, logout
+from .forms import CustomUserCreationForm, UserUpdateForm
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.db import IntegrityError
 import smtplib
 from email.mime.text import MIMEText
@@ -14,8 +14,11 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
+from .models import Empleado, Propietario
+from django.db import transaction
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def crearcc(request):
@@ -26,15 +29,16 @@ def crearcc(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid(): #Si formulario enviado por el POST es valida
             try:
-                user = form.save(commit=False)
-                user.is_active = False #Desactivar cuenta hasta que se confirme el correo
-                user.save()
-                
+                with transaction.atomic(): #Asegura que la creación del usuario y el propietario se realicen como una sola transacción
+                    user = form.save(commit=False)
+                    user.is_active = False #Desactivar cuenta hasta que se confirme el correo
+                    user.save()
+                    Propietario.objects.create(user=user) #Crear un propietario asociado al usuario
 
-                enviarcorreocc(request, user)
-                grupo_usuario_comercio = Group.objects.get(name='usuario-comercio')
-                user.groups.add(grupo_usuario_comercio)
-                return render(request, 'accounts/confirmar_cuenta.html')                
+                    enviarcorreocc(request, user)
+                    grupo_usuario_comercio = Group.objects.get(name='usuario-comercio')
+                    user.groups.add(grupo_usuario_comercio)
+                    return render(request, 'accounts/confirmar_cuenta.html')                
             except IntegrityError: # Usuario ya existe
                 return render(
                     request,
@@ -47,7 +51,8 @@ def crearcc(request):
                 "accounts/crearcuenta.html",
                 {"form": form, "error": form.errors},
             )      
-        
+
+      
 def enviarcorreocc(request, user):
     smtp_server = settings.EMAIL_HOST
     smtp_port = settings.EMAIL_PORT
@@ -74,6 +79,7 @@ def enviarcorreocc(request, user):
         server.login(smtp_user, smtp_password)
         server.sendmail(smtp_user, destinatario, mensaje.as_string())
 
+
 def activar_cuenta(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -90,42 +96,78 @@ def activar_cuenta(request, uidb64, token):
     else:
         return render(request, 'accounts/activacion_invalida.html')  # Muestra una página de error de activación inválida
 
-def signin(request): #Comprobar en base de datos si datos existen  Añadir olvide contraseña
+
+def signin(request):
     if request.method == 'GET':
-        form = AuthenticationForm()
-        return render(request, 'accounts/login.html', {
-        'form' : form
-        })
+        return render(request, 'accounts/login.html', {'form': AuthenticationForm()})
     else:
-        user = authenticate(
-            request, username=request.POST['username'], password=request.POST
-            ['password'])
-        if user is None:
-            return render(request, 'accounts/login.html', {
-                'form' : AuthenticationForm,
-                'error' : 'Usuario y/o contraseña son incorrectos'
-            })
-        else: #Verifica que pertenezca al grupo usuario-comercio o al usuario-empleado
-            if user.groups.filter(name='usuario-comercio').exists():
-                login(request,user)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)# Redirigimos al inicio y que el base.html decida qué mostrar
                 return redirect('inicio')
             else:
-                if user.groups.filter(name='usuario-empleado').exists():
-                    login(request,user)
-                    return redirect('inicio')
-                else:
-                    return render(request, 'accounts/login.html', {
-                    'form' : AuthenticationForm,
-                    'error': 'No tienes permisos para acceder como comercio o empleado.'
-                    })
+                return render(request, 'accounts/login.html', {
+                    'form': AuthenticationForm(),
+                    'error': 'Tu cuenta aún no ha sido activada. Revisá tu email.'
+                })
+        else:
+            return render(request, 'accounts/login.html', {
+                'form': AuthenticationForm(),
+                'error': 'Usuario y/o contraseña son incorrectos'
+            })
 
+@login_required
 def signout(request):
      logout(request)
      return redirect('inicio')
 
+#Vista para el perfil
+@login_required
+def ver_perfil(request):
+    user = request.user
+    return render (request, 'accounts/perfil.html', {'user': user})
+    
+@login_required
+def editar_perfil_propietario(request):
+    user = request.user
+    form = UserUpdateForm(instance=user)
+    if request.method == 'GET':
+        return render(request, 'accounts/editar_perfil.html', {'user': user, 'form': form})
+            
+@login_required
+def editar_perfil_empleado(request):
+    user = request.user
+    form = UserUpdateForm(instance=user)
+    if request.method == 'POST':
+        nuevo_alias = request.POST.get('alias')
+        if not Empleado.objects.filter(alias=nuevo_alias).exists():
+            empleado = user.empleado
+            empleado.alias = nuevo_alias
+            empleado.save()
+            messages.success(request, 'Alias actualizado exitosamente.')
+            return redirect('ver_perfil')
+        else:
+            messages.error(request, 'El alias ya está en uso. Por favor elige otro.')
+            
+    return render(request, 'accounts/editar_perfil.html', {'user': user, 'form': form})
 
-            
-            
-            
-            
-            
+
+@login_required
+def cambiar_contrasena(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request,user)  # Evita que el usuario sea desconectado después de cambiar la contraseña
+            messages.success(request, 'Tu contraseña ha sido cambiada exitosamente.')
+            return redirect('ver_perfil')
+        else:
+            messages.error(request, 'Por favor corrige los errores indicados')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'accounts/cambiar_contrasena.html', {'form': form})
+

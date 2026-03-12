@@ -1,0 +1,67 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'css/account.css' %}">
+    {% endblock %}
+    <title>Editar Perfil</title>
+</head>
+{% block content %}
+<div class="edit-perfil-container">
+    <div class="edit-perfil-wrapper"> 
+        <h1 class="centered-title edit-title">Editar Perfil</h1>
+
+        <form method="POST" class="form-container">
+            {% csrf_token %}
+
+            <div class="botones-accion" style="margin-bottom: 25px;">
+                <a href="{% url 'cambiar_contrasena' %}" class="btn btn-secundario">Cambiar contraseña</a>
+            </div>
+
+            <div class="login-input-box">
+                <input type="text" value="{{ user.first_name }}" readonly>
+                <i class='bx bxs-user'></i>
+            </div>
+            
+            <div class="login-input-box">
+                <input type="text" value="{{ user.last_name }}" readonly>
+                <i class='bx bxs-user'></i>
+            </div>
+
+            <div class="login-input-box">
+                <input type="email" value="{{ user.email }}" readonly>
+                <i class='bx bxs-envelope'></i>
+            </div>
+
+            {% if user.propietario %}
+                
+                <p class="edit-mensaje-protegido">
+                    Tus datos personales están protegidos.
+                </p>
+
+            {% elif user.empleado %}
+                
+                <div class="login-input-box">
+                    <input type="text" name="alias" value="{{ user.empleado.alias }}" placeholder="Tu alias público" required>
+                    <i class='bx bxs-id-card'></i>
+                </div>
+
+                <div class="botones-accion">
+                    <button type="submit" class="btn btn-secundario">Guardar Alias</button>
+                </div>
+
+            {% endif %}
+
+            <div class="botones-accion" style="margin-top: 15px;">
+                <a href="{% url 'ver_perfil' %}" class="btn btn-secundario">Volver al perfil</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}

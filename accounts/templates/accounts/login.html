@@ -1,45 +1,47 @@
 {% extends 'web/base.html' %}
 {% load static %}
-{% block content %}
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'css/account.css' %}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {% endblock %}
     <title>Login</title>
 </head>
-<body >
 
+{% block content %}
 
-    <div class="wrapper-container">     
+    <div class="login-wrapper-container">     
 
-        <div class="wrapper">
+        <div class="login-wrapper">
 
-            <form action="/Miproppi/" method="POST">
+            <form action="{% url 'login' %}" method="POST">
                 {% csrf_token %}
                 <h1>Login</h1>
 
                 {{ error }}
-                <div class="input-box">
+                <div class="login-input-box">
                     <input type="text" id="username" name="username" placeholder="Usuario" required>
                     <i class='bx bxs-user'></i>
                 </div>
 
-                <div class="input-box">
+                <div class="login-input-box">
                     <input type="password" id="password" name="password" placeholder="Contraseña" required>
                     <i class='bx bxs-lock-alt'></i>
                 </div>
-                <div class="remember-forgot">
+                <div class="login-remember-forgot">
                     <label><input type="checkbox">Recuerdame</label>
                     <a href="">Olvidé mi contraseña</a>
                 </div>
 
                 <button type="submit" class="btn" >Login</button>
 
-                <div class="register-link">
+                <div class="login-register-link">
                     <p>¿No tenes Proppi? <a href="{% url 'crear_cuenta' %}">Registrarse</a></p>
                 </div>
 
@@ -50,8 +52,8 @@
         </div>
 
     </div>
-</body>
+
 
 {% endblock %}
 
-</html>
+

@@ -1,83 +1,88 @@
 {% extends 'web/base.html' %}
 {% load static %}
 
-{% block content %}
+
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/register.css' %}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Register</title>
+    {% block extra.css %}
+        <link rel="stylesheet" href="{% static 'css/account.css' %}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {% endblock %}
+    
 </head>
 <body>
+    {% block content %}
 
-    <div class="wrapper-container"> 
 
-        <div class="wrapper"> 
+        <div class="reg-container"> 
+
+            <div class="reg-wrapper"> 
+                
+
+                <form action="{% url 'crear_cuenta' %}" method="POST" class="form-container">
+                    {% csrf_token %}
+                    <h1 class="centered-title">Crea tu cuenta</h1> 
+                    {% if error %}
+                        <div class="reg-error-message">
+                            {% for field, messages in error.items %}
+                                <p> {{ messages|striptags }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="reg-input-box">
+                        <div class="reg-input-field">
+                            <input type="text" name="username" id="username" placeholder="Nombre de Usuario" required>
+                            <i class='bx bxs-user'></i>
+                        </div>
+                        <div class="reg-input-field">
+                            <input type="email" name="email" id="email" placeholder="Correo Electrónico" required>
+                            <i class='bx bxs-envelope'></i>
+                        </div>
+                    </div>
+
+                    <div class="reg-input-box">
+                        <div class="reg-input-field">
+                            <input type="password" name="password1" id="password1" placeholder="Contraseña" required>
+                            <i class='bx bxs-lock-alt'></i>
+                        </div>
+                        <div class="reg-input-field">
+                            <input type="password" name="password2" id="password2" placeholder="Verificar Contraseña" required>
+                            <i class='bx bxs-lock-alt'></i>
+                        </div>   
+
+                    </div>
+
+                    <div class="reg-input-box">
+
+                        <div class="reg-input-field">
+                            <input type="text" name="first_name" id="first_name" placeholder="Nombre" required>
+                            <i class='bx bxs-user'></i>
+                        </div>
+                        <div class="reg-input-field">
+                            <input type="text" name="last_name" id="last_name" placeholder="Apellido" required>
+                            <i class='bx bxs-user'></i>
+                        </div>
+                    </div>
+
+                    <!--<div class="input-box">
+
+                        <div class="input-field">
+                            <input type="text" name="cuit" id="cuit" placeholder="CUIT" required>
+                            <i class='bx bxs-briefcase-alt-2'></i>
+                        </div>
+                    </div>-->
+
+                    <button type="submit" class="btn">Registrarse</button>
+                </form>
             
+            </div>
 
-            <form action="{% url 'crear_cuenta' %}" method="POST" class="form-container">
-                {% csrf_token %}
-                <h1 class="centered-title">Crea tu cuenta</h1> 
-                {% if error %}
-                    <div class="error-message">
-                        {% for field, messages in error.items %}
-                            <p> {{ messages|striptags }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                <div class="input-box">
-                    <div class="input-field">
-                        <input type="text" name="username" id="username" placeholder="Nombre de Usuario" required>
-                        <i class='bx bxs-user'></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="email" name="email" id="email" placeholder="Correo Electrónico" required>
-                        <i class='bx bxs-envelope'></i>
-                    </div>
-                </div>
-
-                <div class="input-box">
-                    <div class="input-field">
-                        <input type="password" name="password1" id="password1" placeholder="Contraseña" required>
-                        <i class='bx bxs-lock-alt'></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" name="password2" id="password2" placeholder="Verificar Contraseña" required>
-                        <i class='bx bxs-lock-alt'></i>
-                    </div>   
-
-                </div>
-
-                <div class="input-box">
-
-                    <div class="input-field">
-                        <input type="text" name="first_name" id="first_name" placeholder="Nombre" required>
-                        <i class='bx bxs-user'></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="text" name="last_name" id="last_name" placeholder="Apellido" required>
-                        <i class='bx bxs-user'></i>
-                    </div>
-                </div>
-
-                <!--<div class="input-box">
-
-                    <div class="input-field">
-                        <input type="text" name="cuit" id="cuit" placeholder="CUIT" required>
-                        <i class='bx bxs-briefcase-alt-2'></i>
-                    </div>
-                </div>-->
-
-                <button type="submit" class="btn">Registrarse</button>
-            </form>
-        
         </div>
-
-    </div>
 </body>
 
 {% endblock %}

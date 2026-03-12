@@ -1,0 +1,55 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'css/account.css' %}">
+    {% endblock %}
+    <title>Perfil</title>
+</head>
+    {% block content %}
+<div class="perfil-wrapper-container">
+    <div class="perfil-wrapper">
+        
+        <div class="perfil-header">
+            <img src="{% static 'default-avatar.avif' %}" alt="Avatar del usuario" class="perfil-avatar">
+            <h1 class="centered-title">{{ user.first_name|default:user.username }}</h1>
+        </div>
+
+        <hr class="perfil-divisor">
+
+        {% if user.propietario %}
+            
+            <div class="perfil-body">
+                <p>Perfil de Propietario</p>
+                <div class="botones-accion">
+                    <a href="{% url 'editar_perfil_propietario' %}" class="btn btn-secundario">Configurar perfil</a>
+                    <a href="" class="btn btn-secundario">Ir a mis comercios</a>
+                </div>
+            </div>
+
+        {% elif user.empleado %}
+            
+            <div class="perfil-body">
+                <p>Perfil de Staff</p>
+                
+                <div class="botones-accion">
+                    <a href="{% url 'editar_perfil_empleado' %}" class="btn btn-secundario">Configurar perfil</a>
+                    <a href="" class="btn btn-secundario">Mis comercios</a>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </div>
+</div>
+    
+        
+    {% endblock %}
+    
+
+
