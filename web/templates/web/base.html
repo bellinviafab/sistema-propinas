@@ -126,7 +126,30 @@
 
   <script src="{% static '/js/script.js' %}"></script>
   
-
+<script>
+        // Esperamos a que la página cargue completamente
+        document.addEventListener('DOMContentLoaded', function() {
+            // Seleccionamos todos los carteles de mensaje
+            const alerts = document.querySelectorAll('.alert');
+            
+            alerts.forEach(function(alert) {
+                // Configuramos un temporizador de 5 segundos (5000 milisegundos)
+                setTimeout(function() {
+                    // Le damos un efecto de desvanecimiento suave
+                    alert.style.transition = "opacity 0.5s ease";
+                    alert.style.opacity = "0";
+                    
+                    // Esperamos medio segundo más para que termine el efecto visual y lo borramos del HTML
+                    setTimeout(function() {
+                        alert.remove();
+                    }, 500);
+                    
+                }, 4000); // Cambiá este 5000 si querés que dure más o menos tiempo
+            });
+        });
+    </script>
+</body>
+</html>
 
 </body>
 </html>

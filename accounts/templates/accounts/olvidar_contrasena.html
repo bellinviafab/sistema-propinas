@@ -1,0 +1,29 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/account.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="login-wrapper-container">
+    <div class="login-wrapper">
+        
+        {{ error }}
+
+        <h1>Olvidar Contraseña</h1>
+        <p style="text-align: center; margin-bottom: 20px;">Ingresá el correo electronico asociado a tu cuenta</p>
+        
+        <form action="{% url 'olvidar_contrasena' %}" method="POST">
+            {% csrf_token %}
+            
+            <div class="login-input-box">
+                <input type="email" name="email" placeholder="Correo Electrónico" required>
+                <i class='bx bxs-envelope'></i> 
+            </div>
+
+            <button type="submit" class="btn">Recuperar Contraseña</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

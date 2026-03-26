@@ -35,8 +35,10 @@
                     <i class='bx bxs-lock-alt'></i>
                 </div>
                 <div class="login-remember-forgot">
-                    <label><input type="checkbox">Recuerdame</label>
-                    <a href="">Olvidé mi contraseña</a>
+                    <label>
+                        <input type="checkbox" name="remember_me">Recuerdame
+                    </label>
+                    <a href="{% url 'olvidar_contrasena' %}">Olvidé mi contraseña</a>
                 </div>
 
                 <button type="submit" class="btn" >Login</button>

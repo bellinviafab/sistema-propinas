@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Restablecer Contraseña - Proppi</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #161616; padding: 20px; margin: 0;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: #000000; padding: 30px; border-radius: 10px; border: 2px solid #009EE3;">
+        
+        <h2 style="color: #ffffff; text-align: center;">Hola, {{ user.username }}</h2>
+        
+        <p style="color: #f1f1f1; font-size: 16px;">
+            Recibimos una solicitud para restablecer la contraseña de tu cuenta en Proppi.
+        </p>
+        <p style="color: #f1f1f1; font-size: 16px;">
+            Para crear una nueva contraseña, hacé clic en el siguiente botón:
+        </p>
+        
+        <div style="text-align: center; margin: 35px 0;">
+            <a href="http://{{ domain }}/accounts/reset/{{ uid }}/{{ token }}/" 
+               style="background-color: #009EE3; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px;">
+               Restablecer mi Contraseña
+            </a>
+        </div>
+        
+        <p style="color: #cccccc; font-size: 14px;">
+            Si el botón no funciona, copiá y pegá este enlace en tu navegador:
+        </p>
+        <p style="color: #009EE3; font-size: 13px; word-break: break-all;">
+            http://{{ domain }}/accounts/reset/{{ uid }}/{{ token }}/
+        </p>
+        
+        <hr style="border: none; border-top: 1px solid #333333; margin: 25px 0;">
+        <p style="color: #888888; font-size: 12px; text-align: center;">
+            Si no solicitaste este cambio, podés ignorar este correo de forma segura. Tu contraseña no se modificará.
+        </p>
+    </div>
+</body>
+</html>

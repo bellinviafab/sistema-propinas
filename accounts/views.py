@@ -2,6 +2,7 @@ import smtplib
 from django.contrib.auth.models import Group, User
 from django.shortcuts import redirect, render
 from Proppi import settings
+from accounts.utils import es_comercio
 from .forms import CustomUserCreationForm, UserUpdateForm
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.db import IntegrityError
@@ -18,7 +19,9 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
 from .models import Empleado, Propietario
 from django.db import transaction
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
+from .utils import es_comercio, es_empleado
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 def crearcc(request):
@@ -107,6 +110,11 @@ def signin(request):
 
         if user is not None:
             if user.is_active:
+                remember_me = request.POST.get('remember_me')
+                if remember_me:
+                    request.session.set_expiry(1209600)  # 2 semanas en segundos
+                else:
+                    request.session.set_expiry(0)  # Expira al cerrar el navegador
                 login(request, user)# Redirigimos al inicio y que el base.html decida qué mostrar
                 return redirect('inicio')
             else:
@@ -132,6 +140,7 @@ def ver_perfil(request):
     return render (request, 'accounts/perfil.html', {'user': user})
     
 @login_required
+@user_passes_test(es_comercio, login_url='inicio')
 def editar_perfil_propietario(request):
     user = request.user
     form = UserUpdateForm(instance=user)
@@ -139,12 +148,13 @@ def editar_perfil_propietario(request):
         return render(request, 'accounts/editar_perfil.html', {'user': user, 'form': form})
             
 @login_required
+@user_passes_test(es_empleado, login_url='inicio')
 def editar_perfil_empleado(request):
     user = request.user
     form = UserUpdateForm(instance=user)
     if request.method == 'POST':
         nuevo_alias = request.POST.get('alias')
-        if not Empleado.objects.filter(alias=nuevo_alias).exists():
+        if not Empleado.objects.filter(alias=nuevo_alias).exclude(id=user.empleado.id).exists():
             empleado = user.empleado
             empleado.alias = nuevo_alias
             empleado.save()
@@ -171,3 +181,46 @@ def cambiar_contrasena(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'accounts/cambiar_contrasena.html', {'form': form})
 
+def olvidar_contrasena(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            user = User.objects.get(email=email)
+            try:
+                enviar_email_restablecer_contrasena(request, user)
+                messages.success(request, 'Se ha enviado un email con instrucciones para restablecer tu contraseña.')
+                return redirect('login')
+            except Exception as e:
+                print({e})
+                messages.error(request, 'Error al enviar el email')
+        except User.DoesNotExist:
+            messages.error(request, 'Si el email ingresado está registrado, recibirás un mensaje con instrucciones para restablecer tu contraseña.')
+            return redirect('olvidar_contrasena')
+    return render(request, 'accounts/olvidar_contrasena.html')
+
+
+def enviar_email_restablecer_contrasena(request, user):
+    smtp_server = settings.EMAIL_HOST
+    smtp_port = settings.EMAIL_PORT
+    smtp_user = settings.EMAIL_HOST_USER
+    smtp_password = settings.EMAIL_HOST_PASSWORD
+
+    current_site = get_current_site(request)
+    mail_subject = 'Restablece tu contraseña'
+    message = render_to_string('accounts/restablecer_contrasena.html', {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': default_token_generator.make_token(user),
+    })
+
+    destinatario = user.email
+    mensaje = MIMEText(message, 'html')
+    mensaje['Subject'] = mail_subject
+    mensaje['From'] = smtp_user
+    mensaje['To'] = destinatario
+
+    with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.starttls()
+        server.login(smtp_user, smtp_password)
+        server.sendmail(smtp_user, destinatario, mensaje.as_string())

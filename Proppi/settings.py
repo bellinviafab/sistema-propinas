@@ -39,6 +39,9 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 
+SESSION_COOKIE_AGE = 43200 # 12 horas en segundos
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
