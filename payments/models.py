@@ -1,5 +1,5 @@
 from django.db import models
-
+import uuid
 # Create your models here.
 
 
@@ -18,7 +18,7 @@ class IngresoDiario(models.Model):
 
 
 class Propina(models.Model):
-    ESTADOS_MP = [
+    ESTADOS = [
         ('AP', 'Aprobado'),
         ('PE', 'Pendiente'),
         ('RE', 'Rechazado'),
@@ -29,9 +29,15 @@ class Propina(models.Model):
     nombre_cliente = models.CharField(max_length=40, null = False)
     monto = models.DecimalField(max_digits=10, decimal_places=2)
     fecha = models.DateTimeField(auto_now_add=True, db_index=True)
-    estado = models.CharField(max_length=2, choices=ESTADOS_MP, default='PE')
+    estado = models.CharField(max_length=2, choices=ESTADOS, default='PE')
     referencia_pago = models.CharField(max_length=100, blank=True, null=True)
-
+    #Relacion con el codigo qr para saber de que mesa/zona vino la propina
+    qr_origen = models.ForeignKey('businesses.CodigoQr', on_delete=models.SET_NULL, null=True, blank=True)
+    turno = models.ForeignKey('staff.TieneAsignado', on_delete=models.SET_NULL, null=True, related_name='propinas')
+    # ID único que enviamos a la API (Nave/MP) para el Webhook
+    referencia_externa = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    # ID que nos devuelve la pasarela una vez pagado
+    id_transaccion_pasarela = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         indexes = [

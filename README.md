@@ -1,108 +1,44 @@
-Descripción del proyecto:
--------------------------------------------------------------------------------------------------------------------------------------------
-Proppi es una plataforma web diseñada para automatizar la gestión de propinas en restaurantes, cafés y bares. El usuario-comercio se registra en la plataforma, donde puede registrar su comercio y añadir a sus empleados, proporcionando información como nombre, email, alias, días y horas de trabajo. Posteriormente, se genera un código QR específico para cada comercio registrado. Los clientes del comercio pueden escanear este QR para enviar propinas a través de los diferentes métodos de pago que la plataforma ofrece.
+# Proppi - Gestión y Automatización de Propinas (SaaS B2B)
 
-A la medianoche de cada día, el sistema calcula y distribuye automáticamente las propinas a los alias de los usuarios-empleados, informándoles por correo electrónico sobre la cantidad de propinas recibidas durante el día, así como el total acumulado.
+Proppi es una plataforma web (SaaS) diseñada para resolver la distribución, trazabilidad y cobro digital de propinas en el sector gastronómico, minimizando la carga operativa de los propietarios y evitando los altos costos de intermediación financiera.
 
-Finalmente, tanto el usuario-comercio como el usuario-empleado pueden acceder a la plataforma (en el caso del usuario-empleado, su cuenta es creada automáticamente cuando el usuario-comercio los registra) para utilizar diversas funcionalidades y realizar consultas, las cuales se explicarán en detalle más adelante.
+## 🚀 El Problema y la Solución
+Actualmente, el cobro de propinas con métodos digitales tradicionales (tarjetas) implica altas comisiones para el local y demoras en la acreditación para los empleados. 
 
-------------------------------------------------
-Requisitos: (Lista completa en el proyecto)
-----------------------------------------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------
-Intrucciones de instalación en entorno local:
------------------------------------------------
+**La solución de Proppi:**
+Implementación de una arquitectura de cobro "Direct-to-Merchant" utilizando códigos QR dinámicos y el estándar de **Transferencias 3.0**. El dinero viaja directamente desde la billetera del cliente a la cuenta del comercio, y el sistema automatiza el cálculo de reparto basado en las horas trabajadas por turno.
 
-1-Clonar repositorio
+## 🏗️ Arquitectura de Software
+El proyecto está construido bajo una arquitectura de Monolito Modular en Django, separando los dominios de negocio para garantizar escalabilidad:
 
+* **`businesses`**: Gestión de locales comerciales, sucursales, configuración de pasarelas de pago y generación automática de QRs (Deep Linking).
+* **`staff`**: Control de turnos, empleados y validación de horas trabajadas (Fricción cero para el empleado).
+* **`payments`**: Motor de transacciones, procesamiento de Webhooks y cálculo del algoritmo de reparto de propinas.
+* **`accounts`**: Gestión de autenticación extendida y perfiles de usuario.
 
-2-Configurar el entorno virtual utilizando:
-
-      python3 -m venv venv
-    
-      
-      source venv/bin/activate
-
-3- Instalar dependencias:
-
-    pip install -r requirements.txt
-
-4-Configurar variables de entorno:
-
-    -Crear archivo .env en la raiz, añadir variables de entorno para las keys
-
-5-Instalar PostgreSQL
+## ⚙️ Stack Tecnológico
+* **Backend:** Python, Django, Django REST Framework.
+* **Base de Datos:** MySQL.
+* **Integraciones:** Mercado Pago (OAuth 2.0 y Webhooks).
 
 
-6- Aplicar migraciones
+## 🛠️ Instalación y Entorno Local
 
+1. Clonar el repositorio:
+   `git clone https://github.com/tu-usuario/proppi.git`
+2. Crear y activar el entorno virtual:
+   `python3 -m venv venv`
+   `source venv/bin/activate`
+3. Instalar dependencias:
+   `pip install -r requirements.txt`
+4. Configurar variables de entorno:
+   Copiar `.env.example` a `.env` y configurar las credenciales de base de datos y llaves de encriptación.
+5. Aplicar migraciones y ejecutar:
+   `python manage.py migrate`
+   `python manage.py runserver`
 
-7- Crear superuser 
+## 📊 Diagrama Entidad-Relación y Estructura
 
---------------------------------------------------------------------------------
-
-DER:
-------------------------------------------------
-![imagen_2024-09-04_123906290](https://github.com/user-attachments/assets/c1eb086a-4d7d-4aba-bda8-82e81c07ec5d)
-
-----------------------------------------------------------------
-
-Estructura del Proyecto:
-------------------------------------------------------------------
-
-Contexto:
-------------
-Existen 2 tipos de usuarios en la plataforma:
-
-    -Usuario-comercio: Es aquel que se registra como dueño de un comercio, y registra su comercio y a sus empleados.
-    
-    -Usuario-empleado: Es aquel cuyo usuario es creado a partir de que el usuario-comercio lo registra. Su usuario será su CUIL y se le envia a su email una contraseña unica (puede ser cambiada)
-    
-----------------------
-El proyecto consta de 5 apps principales; (Adherircom, Autotask, Cuentamaster, Inicio, MiProppi):
---------------
-"Adherircom", "Inicio", "MiProppi" son apps que estan directamente relacionadas con la interacción de los usuarios.
-
-"Autotask", "Cuentamaster" son apps para cuestiones internas del sistema (Automatización y actualización de balances)
-
-"Adherircom":
--------------------------
- En esta app se encuentra implementado todo lo relacionado a la creación de la cuenta del usuario-comercio, y también contiene todos los modelos que maneja la plataforma
-
- Views.py:
--------
- Maneja las siguientes vistas:
-
-    -creacc (creación de cuenta)
-    -enviarcorreocc   (Envia correo de activación de cuenta)
-    -activar_cuenta (Maneja la vista para activar la cuenta una vez que el usuario-comercio pulsa para activar la cuenta)
-    -regcom (Registración de comercio)
-    -regemp (Registración de cada empleado)
-    -asignaqr (Asigna el qr que los clientes podrán escanear para depositar propinas)
-    -asignaqr_entrada (Asigna otro qr que funciona como checkin que cada usuario-empleado deberá hacer)
-    -crea_user_empleado (Una vez que un empleado es registrado, esta vista se encarga de asignarle los permisos necesarios a este nuevo usuario)
-    -generar_clave_aleatoria (Vista que genera claves aleatorias cuando empleado es registrado)
-    -signout (Cerrar sesión)
-
-Models.py:
-----------
-Para el modelo usuario, se utiliza la clase User que provee django por default (tanto para usuario-comercio como para usuario-empleado, se diferencian mediante permisos). 
-Se implementan los modelos "UserProfile" ,"Comercio", "Empleado", "Propina", "HorarioTrabajo".
-
-UserProfile:
-Este modelo extiende al usuario de Django con un campo extra, cuit, y está relacionado uno a uno con el modelo User de Django.
-
-Comercio:
-Representa un comercio que tiene un propietario (relación ForeignKey con User, Un user puede tener varios comercios) y puede tener varios empleados. También almacena información importante como nombre, dirección, ingresos y los códigos QR asociados.
-
-Propina:
-Este modelo guarda la información de las propinas recibidas por un comercio, con un campo de monto y un campo de fecha. Está relacionado con el modelo Comercio.
-
-Empleado:
-Almacena la información de los empleados, como nombre, CUIL, ingresos y los comercios donde trabaja (relación ManyToMany con Comercio, Un empleado puede estar vinculado con multiples comercios).
-
-HorarioTrabajo:
-Maneja los horarios de trabajo de los empleados, con un campo dia_semana que indica el día de la semana y cantidad_horas para las horas trabajadas.
 
 
 
@@ -119,29 +55,4 @@ Maneja los horarios de trabajo de los empleados, con un campo dia_semana que ind
 
 ----------------
 
-    Cuestiones a agregar:
-      -Actualizar cantidad de comercios y cantidad de usuarios registrados H 
-      -Más opciones de reparto de propina 
-      -Mejorar tema de redireccion de rutas protegidas H
-      -Corregir, que botón guardar funcione como un guardar todo H 
-      -Si ya esta registrado, que rediriga a la cuenta H 
-      -Si ya esta logeado que no figure el log H
-      -Cada empleado debería poder estar relacionado con multiples comercios H
-    
-      -Si empleado es eliminado de un comercio, que lo desligue pero que no borre su cuenta H
-    
-    
-      -Si empleado ya existe en la bd, que pueda ser reutilizado.
-    
-      -Ocultar public keys
-        -Solicitud del front para acceder a las keys
-
-    
-
-    Cosas por terminar:
-        -Cambiar base de datos H
-        -Hacer prueba con mercado pago en produccion
-        -Implementar modo
-        -Revisar INFO PARA CUENTA MAIN  
-        -Poder ver horarios de cada empleado / poder modificarlos
 
