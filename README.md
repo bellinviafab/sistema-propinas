@@ -1,4 +1,4 @@
-# Proppi - Gestión y Automatización de Propinas (SaaS B2B)
+# Proppi - Gestión y Automatización de Propinas 
 
 Proppi es una plataforma web (SaaS) diseñada para resolver la distribución, trazabilidad y cobro digital de propinas en el sector gastronómico, minimizando la carga operativa de los propietarios y evitando los altos costos de intermediación financiera.
 
