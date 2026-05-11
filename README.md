@@ -1,6 +1,6 @@
 # Proppi - Gestión y Automatización de Propinas 
 
-Proppi es una plataforma web (SaaS) diseñada para resolver la distribución, trazabilidad y cobro digital de propinas en el sector gastronómico, minimizando la carga operativa de los propietarios y evitando los altos costos de intermediación financiera.
+Proppi es una plataforma web diseñada para resolver la distribución, trazabilidad y cobro digital de propinas en el sector gastronómico, minimizando la carga operativa de los propietarios y evitando los altos costos de intermediación financiera.
 
 ## 🚀 El Problema y la Solución
 Actualmente, el cobro de propinas con métodos digitales tradicionales (tarjetas) implica altas comisiones para el local y demoras en la acreditación para los empleados. 
