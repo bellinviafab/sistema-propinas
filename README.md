@@ -38,6 +38,12 @@ El proyecto está construido bajo una arquitectura de Monolito Modular en Django
    `python manage.py runserver`
 
 ## 📊 Diagrama Entidad-Relación y Estructura
+DER
+<img width="1654" height="1306" alt="proppidb" src="https://github.com/user-attachments/assets/ddc182ee-3269-4fca-9beb-fde590488c07" />
+
+
+Diagrama de paquetes
+<img width="1019" height="811" alt="P-pp drawio" src="https://github.com/user-attachments/assets/d98ab061-f958-48f4-b6ad-b648a7d8364b" />
 
 
 
